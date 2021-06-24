@@ -4,8 +4,8 @@ import { useRouter } from 'next/router';
 export default function Seo(props) {
   const router = useRouter();
   const meta = {
-    title: 'Next.js Tailwind Starter',
-    description: 'A template for Next.js and Tailwindcss by Theodorus Clarence',
+    title: 'Campuspedia Academy',
+    description: 'Campuspedia academy tugas APSI B09 2021',
     image: 'https://theodorusclarence.com/favicon/large-og.jpg',
     type: 'website',
     robots: 'follow, index',
