@@ -17,15 +17,15 @@
 
   /* Write your own custom base styles here */
   h1 {
-    @apply text-3xl font-bold md:text-5xl font-primary;
+    @apply text-3xl font-bold md:text-4xl font-primary;
   }
 
   h2 {
-    @apply text-2xl font-bold md:text-4xl font-primary;
+    @apply text-2xl font-bold md:text-3xl font-primary;
   }
 
   h3 {
-    @apply text-xl font-bold md:text-3xl font-primary;
+    @apply text-xl font-bold md:text-2xl font-primary;
   }
 
   h4 {
@@ -76,4 +76,8 @@
   padding-bottom: 0.2rem;
   padding-left: 0.7rem;
   border-radius: 0.5rem;
+}
+
+.yt-lite::before {
+  content: none !important;
 }
