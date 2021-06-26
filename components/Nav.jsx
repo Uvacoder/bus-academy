@@ -1,5 +1,7 @@
 import { Fragment } from 'react';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
+
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import {
   HiSearch,
@@ -16,6 +18,15 @@ import { classNames } from '@/lib/helper';
 import UnstyledLink from '@/components/UnstyledLink';
 
 export default function Nav() {
+  const { asPath } = useRouter();
+
+  const navItems = [
+    { label: 'Beranda', href: '/' },
+    { label: 'Cari Kelas', href: '/cari-kelas' },
+    { label: 'Akses Kelas', href: '/akses-kelas' },
+    { label: 'Keranjang', href: '/keranjang' },
+  ];
+
   return (
     <Disclosure as='nav' className='fixed top-0 z-10 w-full shadow bg-sky-500'>
       {({ open }) => (
@@ -24,35 +35,25 @@ export default function Nav() {
             <div className='flex justify-between h-16'>
               <div className='flex px-2 lg:px-0'>
                 <div className='flex items-center flex-shrink-0'>
-                  <figure className='w-28'>
+                  <UnstyledLink href='/' className='w-28'>
                     <Image className='w-20' src={logo} />
-                  </figure>
+                  </UnstyledLink>
                 </div>
                 <div className='hidden lg:ml-6 lg:flex lg:space-x-8'>
-                  <UnstyledLink
-                    href='/'
-                    className='inline-flex items-center px-1 pt-1 text-sm font-medium text-white border-b-2 border-white'
-                  >
-                    Beranda
-                  </UnstyledLink>
-                  <UnstyledLink
-                    href='/cari-kelas'
-                    className='inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-100 border-b-2 border-transparent hover:border-gray-300 hover:text-gray-200'
-                  >
-                    Cari Kelas
-                  </UnstyledLink>
-                  <UnstyledLink
-                    href='/akses-kelas'
-                    className='inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-100 border-b-2 border-transparent hover:border-gray-300 hover:text-gray-200'
-                  >
-                    Akses Kelas
-                  </UnstyledLink>
-                  <UnstyledLink
-                    href='/keranjang'
-                    className='inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-100 border-b-2 border-transparent hover:border-gray-300 hover:text-gray-200'
-                  >
-                    Keranjang
-                  </UnstyledLink>
+                  {navItems.map(({ href, label }) => (
+                    <UnstyledLink
+                      key={href}
+                      href={href}
+                      className={classNames(
+                        'inline-flex items-center px-1 pt-1 text-sm font-medium border-b-2',
+                        asPath === href
+                          ? 'text-white border-white'
+                          : 'text-gray-100 border-transparent hover:border-gray-300 hover:text-gray-200'
+                      )}
+                    >
+                      {label}
+                    </UnstyledLink>
+                  ))}
                 </div>
               </div>
               <div className='flex items-center justify-center flex-1 px-2 lg:ml-6 lg:justify-end'>
@@ -123,41 +124,41 @@ export default function Nav() {
                         >
                           <Menu.Item>
                             {({ active }) => (
-                              <a
-                                href='#'
+                              <UnstyledLink
+                                href='/profile'
                                 className={classNames(
                                   active ? 'bg-gray-100' : '',
                                   'block px-4 py-2 text-sm text-gray-700'
                                 )}
                               >
-                                Your Profile
-                              </a>
+                                Profil
+                              </UnstyledLink>
                             )}
                           </Menu.Item>
                           <Menu.Item>
                             {({ active }) => (
-                              <a
-                                href='#'
+                              <UnstyledLink
+                                href='/login'
                                 className={classNames(
                                   active ? 'bg-gray-100' : '',
                                   'block px-4 py-2 text-sm text-gray-700'
                                 )}
                               >
-                                Settings
-                              </a>
+                                Login
+                              </UnstyledLink>
                             )}
                           </Menu.Item>
                           <Menu.Item>
                             {({ active }) => (
-                              <a
-                                href='#'
+                              <UnstyledLink
+                                href='/register'
                                 className={classNames(
                                   active ? 'bg-gray-100' : '',
                                   'block px-4 py-2 text-sm text-gray-700'
                                 )}
                               >
-                                Sign out
-                              </a>
+                                Register
+                              </UnstyledLink>
                             )}
                           </Menu.Item>
                         </Menu.Items>
