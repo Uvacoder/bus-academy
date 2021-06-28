@@ -5,7 +5,7 @@ import Nav from '@/components/Nav';
 import Input from '@/components/Input';
 import ClassCard from '@/components/ClassCard';
 import Pagination from '@/components/Pagination';
-import FilterBox from '@/components/FIlterBox';
+import FilterBox from '@/components/FilterBox';
 
 export default function Keranjang() {
   const router = useRouter();
