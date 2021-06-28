@@ -27,7 +27,7 @@ export default function Keranjang() {
             <h1 className='text-center'>Kelas Anda</h1>
             <div className='grid grid-cols-1 gap-4 mt-16 md:grid-cols-3'>
               <ClassCard access />
-              <ClassCard access />
+              <ClassCard access isLive />
               <ClassCard access />
             </div>
           </div>
