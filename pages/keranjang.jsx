@@ -44,8 +44,35 @@ export default function Keranjang() {
                   detail={kelas}
                   isLive={kelas.isLive}
                   onRemove={removeCart}
+                  showPrice
                 />
               ))}
+            </div>
+            <h3 className='mt-8 font-semibold'>Rincian Pembelian</h3>
+            <div className='mt-2 space-y-2'>
+              <div className='flex justify-between'>
+                <span className='inline-block min-w-[80%]'>
+                  Kelas – Manage your way with great public speaking
+                </span>{' '}
+                <span className='ml-auto'>Rp 50.000</span>
+              </div>
+              <div className='flex justify-between'>
+                <span className='inline-block min-w-[80%]'>
+                  Kelas – Menulis essay untuk beasiswa
+                </span>{' '}
+                <span className='ml-auto'>Rp 50.000</span>
+              </div>
+              <div className='flex justify-between'>
+                <span className='inline-block min-w-[80%]'>Kupon ACAD12</span>{' '}
+                <span className='ml-auto'>- Rp 10.000</span>
+              </div>
+              <hr className='mt-2' />
+              <div className='flex justify-end'>
+                <span className='inline-block min-w-[80%] text-right'>
+                  Total
+                </span>{' '}
+                <span className='ml-auto'>Rp 110.000</span>
+              </div>
             </div>
             <FormProvider {...methods}>
               <form
