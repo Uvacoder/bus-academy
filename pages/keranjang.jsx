@@ -36,7 +36,7 @@ export default function Keranjang() {
         <section className=''>
           <div className='flex flex-col min-h-screen py-16 mt-16 layout'>
             <h1 className='text-center'>Keranjang Pembelian</h1>
-            <div className='grid grid-cols-3 gap-4 mt-16'>
+            <div className='grid grid-cols-1 gap-4 mt-16 md:grid-cols-3'>
               {cart.map((kelas) => (
                 <ClassCard
                   cart
@@ -59,7 +59,7 @@ export default function Keranjang() {
               </form>
             </FormProvider>
             <h2 className='mt-12'>Kelas yang ramai dibeli</h2>
-            <div className='grid grid-cols-3 gap-4 mt-8'>
+            <div className='grid grid-cols-1 gap-4 mt-8 md:grid-cols-3'>
               <ClassCard addToCart showPrice />
               <ClassCard addToCart showPrice />
               <ClassCard addToCart showPrice />

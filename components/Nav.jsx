@@ -1,6 +1,7 @@
 import { Fragment } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
+import { useForm } from 'react-hook-form';
 
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import {
@@ -18,7 +19,12 @@ import { classNames } from '@/lib/helper';
 import UnstyledLink from '@/components/UnstyledLink';
 
 export default function Nav() {
-  const { asPath } = useRouter();
+  const { asPath, push } = useRouter();
+  const { register, handleSubmit, reset } = useForm();
+  function onSearch(data) {
+    push(`/cari-kelas?search=${data.search}`);
+    reset();
+  }
 
   const navItems = [
     { label: 'Beranda', href: '/' },
@@ -68,13 +74,16 @@ export default function Nav() {
                         aria-hidden='true'
                       />
                     </div>
-                    <input
-                      id='search'
-                      name='search'
-                      className='block w-full py-2 pl-10 pr-3 leading-5 placeholder-gray-500 bg-white border border-gray-300 rounded-md focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'
-                      placeholder='Search'
-                      type='search'
-                    />
+                    <form onSubmit={handleSubmit(onSearch)}>
+                      <input
+                        {...register('search')}
+                        id='search'
+                        name='search'
+                        className='block w-full py-2 pl-10 pr-3 leading-5 placeholder-gray-500 bg-white border border-gray-300 rounded-md focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'
+                        placeholder='Search'
+                        type='search'
+                      />
+                    </form>
                   </div>
                 </div>
               </div>
