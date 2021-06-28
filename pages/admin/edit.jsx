@@ -228,7 +228,7 @@ export default function Edit() {
             >
               <div className='px-2 space-y-1'>
                 {navigation.map((item) => (
-                  <a
+                  <UnstyledLink
                     key={item.name}
                     href={item.href}
                     className={classNames(
@@ -244,7 +244,7 @@ export default function Edit() {
                       aria-hidden='true'
                     />
                     {item.name}
-                  </a>
+                  </UnstyledLink>
                 ))}
               </div>
               <div className='pt-6 mt-6'>

@@ -227,7 +227,7 @@ export default function Example() {
             >
               <div className='px-2 space-y-1'>
                 {navigation.map((item) => (
-                  <a
+                  <UnstyledLink
                     key={item.name}
                     href={item.href}
                     className={classNames(
@@ -243,7 +243,7 @@ export default function Example() {
                       aria-hidden='true'
                     />
                     {item.name}
-                  </a>
+                  </UnstyledLink>
                 ))}
               </div>
               <div className='pt-6 mt-6'>
