@@ -102,10 +102,10 @@ export default function Nav() {
                 </Disclosure.Button>
               </div>
               <div className='hidden lg:ml-4 lg:flex lg:items-center'>
-                <button className='flex-shrink-0 p-1 text-gray-400 bg-white rounded-full hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'>
+                {/* <button className='flex-shrink-0 p-1 text-gray-400 bg-white rounded-full hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'>
                   <span className='sr-only'>View notifications</span>
                   <HiOutlineBell className='w-6 h-6' aria-hidden='true' />
-                </button>
+                </button> */}
 
                 {/* Profile dropdown */}
                 <Menu as='div' className='relative flex-shrink-0 ml-4'>
@@ -209,10 +209,10 @@ export default function Nav() {
                     tom@example.com
                   </div>
                 </div>
-                <button className='flex-shrink-0 p-1 ml-auto text-gray-400 bg-white rounded-full hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'>
+                {/* <button className='flex-shrink-0 p-1 ml-auto text-gray-400 bg-white rounded-full hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'>
                   <span className='sr-only'>View notifications</span>
                   <HiOutlineBell className='w-6 h-6' aria-hidden='true' />
-                </button>
+                </button> */}
               </div>
               <div className='mt-3 space-y-1'>
                 <UnstyledLink
