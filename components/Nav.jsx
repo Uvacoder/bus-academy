@@ -80,7 +80,7 @@ export default function Nav() {
               </div>
               <div className='flex items-center lg:hidden'>
                 {/* Mobile menu button */}
-                <Disclosure.Button className='inline-flex items-center justify-center p-2 text-gray-400 rounded-md hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500'>
+                <Disclosure.Button className='inline-flex items-center justify-center p-2 text-white rounded-md hover:text-gray-100 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500'>
                   <span className='sr-only'>Open main menu</span>
                   {open ? (
                     <HiOutlineX className='block w-6 h-6' aria-hidden='true' />
@@ -172,42 +172,31 @@ export default function Nav() {
 
           <Disclosure.Panel className='lg:hidden'>
             <div className='pt-2 pb-3 space-y-1'>
-              {/* Current: "bg-indigo-50 border-indigo-500 text-indigo-700", Default: "border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800" */}
-              <a
-                href='#'
-                className='block py-2 pl-3 pr-4 text-base font-medium text-indigo-700 border-l-4 border-indigo-500 bg-indigo-50'
-              >
-                Dashboard
-              </a>
-              <a
-                href='#'
-                className='block py-2 pl-3 pr-4 text-base font-medium text-gray-600 border-l-4 border-transparent hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800'
-              >
-                Team
-              </a>
-              <a
-                href='#'
-                className='block py-2 pl-3 pr-4 text-base font-medium text-gray-600 border-l-4 border-transparent hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800'
-              >
-                Projects
-              </a>
-              <a
-                href='#'
-                className='block py-2 pl-3 pr-4 text-base font-medium text-gray-600 border-l-4 border-transparent hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800'
-              >
-                Calendar
-              </a>
+              {navItems.map(({ href, label }) => (
+                <UnstyledLink
+                  key={href}
+                  href={href}
+                  className={classNames(
+                    'block py-2 pl-3 pr-4 text-base font-medium  border-l-4 ',
+                    asPath === href
+                      ? 'text-sky-700  border-sky-500 bg-sky-50'
+                      : 'text-gray-100  border-transparent hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800'
+                  )}
+                >
+                  {label}
+                </UnstyledLink>
+              ))}
             </div>
             <div className='pt-4 pb-3 border-t border-gray-200'>
               <div className='flex items-center px-4'>
-                <div className='flex-shrink-0 p-1 ml-auto text-gray-400 bg-white rounded-full hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'>
+                <div className='flex-shrink-0 p-1 text-gray-400 bg-white rounded-full hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'>
                   <HiUser className='w-6 h-6' />
                 </div>
                 <div className='ml-3'>
                   <div className='text-base font-medium text-gray-800'>
                     Tom Cook
                   </div>
-                  <div className='text-sm font-medium text-gray-500'>
+                  <div className='text-sm font-medium text-gray-50'>
                     tom@example.com
                   </div>
                 </div>
@@ -217,24 +206,33 @@ export default function Nav() {
                 </button>
               </div>
               <div className='mt-3 space-y-1'>
-                <a
-                  href='#'
-                  className='block px-4 py-2 text-base font-medium text-gray-500 hover:text-gray-800 hover:bg-gray-100'
+                <UnstyledLink
+                  href='/profile'
+                  className={classNames(
+                    'block py-2 pl-3 pr-4 text-base font-medium  border-l-4 ',
+                    'text-gray-100  border-transparent hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800'
+                  )}
                 >
-                  Your Profile
-                </a>
-                <a
-                  href='#'
-                  className='block px-4 py-2 text-base font-medium text-gray-500 hover:text-gray-800 hover:bg-gray-100'
+                  Profile
+                </UnstyledLink>
+                <UnstyledLink
+                  href='/login'
+                  className={classNames(
+                    'block py-2 pl-3 pr-4 text-base font-medium  border-l-4 ',
+                    'text-gray-100  border-transparent hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800'
+                  )}
                 >
-                  Settings
-                </a>
-                <a
-                  href='#'
-                  className='block px-4 py-2 text-base font-medium text-gray-500 hover:text-gray-800 hover:bg-gray-100'
+                  Login
+                </UnstyledLink>
+                <UnstyledLink
+                  href='/register'
+                  className={classNames(
+                    'block py-2 pl-3 pr-4 text-base font-medium  border-l-4 ',
+                    'text-gray-100  border-transparent hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800'
+                  )}
                 >
-                  Sign out
-                </a>
+                  Register
+                </UnstyledLink>
               </div>
             </div>
           </Disclosure.Panel>
