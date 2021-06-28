@@ -9,6 +9,7 @@ import Nav from '@/components/Nav';
 import UnstyledLink from '@/components/UnstyledLink';
 import ClassCard from '@/components/ClassCard';
 import Seo from '@/components/Seo';
+import ChatBox from '@/components/ChatBox';
 
 const features = [
   {
@@ -150,11 +151,12 @@ const footerNavigation = {
   ],
 };
 
-export default function Example() {
+export default function LandingPage() {
   return (
     <>
       <Seo />
       <Nav />
+      <ChatBox />
       <div className='py-4 mt-16 bg-white'>
         <main>
           {/* Hero section */}
