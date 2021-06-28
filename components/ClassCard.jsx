@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { HiOutlinePlus, HiOutlineX } from 'react-icons/hi';
+import { HiOutlineCalendar, HiOutlinePlus, HiOutlineX } from 'react-icons/hi';
 
 import SampleAvatar from '@/public/images/sample-avatar.png';
 
@@ -19,14 +19,22 @@ export default function ClassCard({
   return (
     <div className='relative flex flex-col items-start p-4 space-y-2 border rounded-md border-sky-500'>
       <Image src='/images/sample.jpg' width={709} height={383} />
-      <span
-        className={classNames(
-          'inline-block px-4 py-1 text-sm font-semibold rounded-full',
-          isLive ? 'bg-green-200' : 'bg-sky-200'
+      <div className='flex items-center justify-between w-full gap-4'>
+        <span
+          className={classNames(
+            'inline-block px-4 py-1 text-sm font-semibold rounded-full',
+            isLive ? 'bg-green-200' : 'bg-sky-200'
+          )}
+        >
+          {isLive ? 'Live' : 'Non Live'}
+        </span>
+        {isLive && (
+          <span className='inline-flex items-center text-sm font-medium'>
+            <HiOutlineCalendar className='inline-block mr-2 text-sky-600' />7
+            Juli 2021, 14:00 – 18:00 WIB
+          </span>
         )}
-      >
-        {isLive ? 'Live' : 'Non Live'}
-      </span>
+      </div>
       <div>
         <h4 className='text-base'>
           Manage your way with great public speaking!
