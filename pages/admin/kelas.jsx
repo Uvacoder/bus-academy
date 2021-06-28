@@ -19,6 +19,11 @@ import {
   HiChevronRight as ChevronRightIcon,
   HiOfficeBuilding as OfficeBuildingIcon,
   HiSearch as SearchIcon,
+  HiDotsVertical as DotsVerticalIcon,
+  HiPencilAlt,
+  HiDuplicate,
+  HiUserAdd,
+  HiTrash,
   HiAcademicCap,
 } from 'react-icons/hi';
 import Image from 'next/image';
@@ -29,66 +34,77 @@ import { classNames } from '@/lib/helper';
 import UnstyledLink from '@/components/UnstyledLink';
 
 const navigation = [
-  { name: 'Home', href: '/admin', icon: HomeIcon, current: true },
+  { name: 'Home', href: '/admin', icon: HomeIcon, current: false },
   {
     name: 'Kelola Kelas',
     href: '/admin/kelas',
     icon: HiAcademicCap,
-    current: false,
+    current: true,
   },
+  // { name: 'Balances', href: '#', icon: ScaleIcon, current: false },
+  // { name: 'Cards', href: '#', icon: CreditCardIcon, current: false },
+  // { name: 'Recipients', href: '#', icon: UserGroupIcon, current: false },
+  // { name: 'Reports', href: '#', icon: DocumentReportIcon, current: false },
 ];
-const secondaryNavigation = [
-  // { name: 'Settings', href: '#', icon: CogIcon },
-  // { name: 'Help', href: '#', icon: QuestionMarkCircleIcon },
-  // { name: 'Privacy', href: '#', icon: ShieldCheckIcon },
-];
-const cards = [
-  {
-    name: 'Pendapatan',
-    href: '#',
-    icon: ScaleIcon,
-    amount: 'Rp 3.000.000',
-  },
-  // More items...
-];
-const transactions = [
+const secondaryNavigation = [];
+
+const projects = [
   {
     id: 1,
-    name: 'Pembayaran a\\n  Jessica Tasyanita',
-    href: '#',
-    amount: 'Rp 150.000',
-    currency: 'IDR',
-    status: 'success',
-    date: 'July 11, 2021',
-    datetime: '2021-07-11',
+    title: 'Public Speaking',
+    initials: 'GA',
+    team: 'Soft Skills',
+    members: [
+      {
+        name: 'Dries Vincent',
+        handle: 'driesvincent',
+        imageUrl:
+          'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+      },
+    ],
+    totalMembers: 1,
+    lastUpdated: 'March 17, 2020',
+    pinned: true,
+    bgColorClass: 'bg-pink-600',
   },
   {
     id: 2,
-    name: 'Pembayaran a\\n  Clarence',
-    href: '#',
-    amount: 'Rp 110.000',
-    currency: 'IDR',
-    status: 'processing',
-    date: 'July 11, 2021',
-    datetime: '2021-07-11',
+    title: 'React',
+    initials: 'GA',
+    team: 'Frontend Development',
+    members: [
+      {
+        name: 'Dries Vincent',
+        handle: 'driesvincent',
+        imageUrl:
+          'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+      },
+    ],
+    totalMembers: 1,
+    lastUpdated: 'March 17, 2020',
+    pinned: true,
+    bgColorClass: 'bg-pink-600',
   },
   {
     id: 3,
-    name: 'Pembayaran a\\n  Nevin',
-    href: '#',
-    amount: 'Rp 50.000',
-    currency: 'IDR',
-    status: 'success',
-    date: 'July 12, 2021',
-    datetime: '2021-07-12',
+    title: 'Laravel',
+    initials: 'GA',
+    team: 'Backend Development',
+    members: [
+      {
+        name: 'Dries Vincent',
+        handle: 'driesvincent',
+        imageUrl:
+          'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+      },
+    ],
+    totalMembers: 1,
+    lastUpdated: 'March 17, 2020',
+    pinned: true,
+    bgColorClass: 'bg-pink-600',
   },
-  // More transactions...
+  // More projects...
 ];
-const statusStyles = {
-  success: 'bg-green-100 text-green-800',
-  processing: 'bg-yellow-100 text-yellow-800',
-  failed: 'bg-gray-100 text-gray-800',
-};
 
 export default function Example() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -373,7 +389,7 @@ export default function Example() {
             </div>
           </div>
         </div>
-        <main className='relative z-0 flex-1 pb-8 overflow-y-auto'>
+        <main className='relative z-0 flex-1 pb-8 '>
           {/* Page header */}
           <div className='bg-white shadow'>
             <div className='px-4 sm:px-6 lg:max-w-6xl lg:mx-auto lg:px-8'>
@@ -418,231 +434,241 @@ export default function Example() {
                     </div>
                   </div>
                 </div>
-                {/* <div className='flex mt-6 space-x-3 md:mt-0 md:ml-4'>
-                  <button
-                    type='button'
-                    className='inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500'
-                  >
-                    Add money
-                  </button>
-                  <button
-                    type='button'
+                <div className='flex mt-6 space-x-3 md:mt-0 md:ml-4'>
+                  <UnstyledLink
+                    href='/admin/tambah'
                     className='inline-flex items-center px-4 py-2 text-sm font-medium text-white border border-transparent rounded-md shadow-sm bg-sky-600 hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500'
                   >
-                    Send money
-                  </button>
-                </div> */}
+                    Tambah Kelas
+                  </UnstyledLink>
+                </div>
               </div>
             </div>
           </div>
 
           <div className='mt-8'>
-            <div className='max-w-6xl px-4 mx-auto sm:px-6 lg:px-8'>
-              <h2 className='text-lg font-medium leading-6 text-gray-900'>
-                Overview
-              </h2>
-              <div className='grid grid-cols-1 gap-5 mt-2 sm:grid-cols-2 lg:grid-cols-3'>
-                {/* Card */}
-                {cards.map((card) => (
-                  <div
-                    key={card.name}
-                    className='overflow-hidden bg-white rounded-lg shadow'
-                  >
-                    <div className='p-5'>
-                      <div className='flex items-center'>
-                        <div className='flex-shrink-0'>
-                          <card.icon
-                            className='w-6 h-6 text-gray-400'
-                            aria-hidden='true'
-                          />
-                        </div>
-                        <div className='flex-1 w-0 ml-5'>
-                          <dl>
-                            <dt className='text-sm font-medium text-gray-500 truncate'>
-                              {card.name}
-                            </dt>
-                            <dd>
-                              <div className='text-lg font-medium text-gray-900'>
-                                {card.amount}
-                              </div>
-                            </dd>
-                          </dl>
-                        </div>
-                      </div>
-                    </div>
-                    <div className='px-5 py-3 bg-gray-50'>
-                      <div className='text-sm'>
-                        <a
-                          href={card.href}
-                          className='font-medium text-sky-700 hover:text-sky-900'
-                        >
-                          View all
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                ))}
+            {/* Projects list (only on smallest breakpoint) */}
+            <div className='mt-10 sm:hidden'>
+              <div className='px-4 sm:px-6'>
+                <h2 className='text-xs font-medium tracking-wide text-gray-500 uppercase'>
+                  Kelas
+                </h2>
               </div>
-            </div>
-
-            <h2 className='max-w-6xl px-4 mx-auto mt-8 text-lg font-medium leading-6 text-gray-900 sm:px-6 lg:px-8'>
-              Recent activity
-            </h2>
-
-            {/* Activity list (smallest breakpoint only) */}
-            <div className='shadow sm:hidden'>
-              <ul className='mt-2 overflow-hidden divide-y divide-gray-200 shadow sm:hidden'>
-                {transactions.map((transaction) => (
-                  <li key={transaction.id}>
+              <ul className='mt-3 border-t border-gray-200 divide-y divide-gray-100'>
+                {projects.map((project) => (
+                  <li key={project.id}>
                     <a
-                      href={transaction.href}
-                      className='block px-4 py-4 bg-white hover:bg-gray-50'
+                      href='#'
+                      className='flex items-center justify-between px-4 py-4 group hover:bg-gray-50 sm:px-6'
                     >
-                      <span className='flex items-center space-x-4'>
-                        <span className='flex flex-1 space-x-2 truncate'>
-                          <CashIcon
-                            className='flex-shrink-0 w-5 h-5 text-gray-400'
-                            aria-hidden='true'
-                          />
-                          <span className='flex flex-col text-sm text-gray-500 truncate'>
-                            <span className='truncate'>{transaction.name}</span>
-                            <span>
-                              <span className='font-medium text-gray-900'>
-                                {transaction.amount}
-                              </span>{' '}
-                              {transaction.currency}
-                            </span>
-                            <time dateTime={transaction.datetime}>
-                              {transaction.date}
-                            </time>
-                          </span>
-                        </span>
-                        <ChevronRightIcon
-                          className='flex-shrink-0 w-5 h-5 text-gray-400'
+                      <span className='flex items-center space-x-3 truncate'>
+                        <span
+                          className={classNames(
+                            project.bgColorClass,
+                            'w-2.5 h-2.5 flex-shrink-0 rounded-full'
+                          )}
                           aria-hidden='true'
                         />
+                        <span className='text-sm font-medium leading-6 truncate'>
+                          {project.title}{' '}
+                          <span className='font-normal text-gray-500 truncate'>
+                            in {project.team}
+                          </span>
+                        </span>
                       </span>
+                      <ChevronRightIcon
+                        className='w-5 h-5 ml-4 text-gray-400 group-hover:text-gray-500'
+                        aria-hidden='true'
+                      />
                     </a>
                   </li>
                 ))}
               </ul>
-
-              <nav
-                className='flex items-center justify-between px-4 py-3 bg-white border-t border-gray-200'
-                aria-label='Pagination'
-              >
-                <div className='flex justify-between flex-1'>
-                  <a
-                    href='#'
-                    className='relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:text-gray-500'
-                  >
-                    Previous
-                  </a>
-                  <a
-                    href='#'
-                    className='relative inline-flex items-center px-4 py-2 ml-3 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:text-gray-500'
-                  >
-                    Next
-                  </a>
-                </div>
-              </nav>
             </div>
 
-            {/* Activity table (small breakpoint and up) */}
-            <div className='hidden sm:block'>
-              <div className='max-w-6xl px-4 mx-auto sm:px-6 lg:px-8'>
-                <div className='flex flex-col mt-2'>
-                  <div className='min-w-full overflow-hidden overflow-x-auto align-middle shadow sm:rounded-lg'>
-                    <table className='min-w-full divide-y divide-gray-200'>
-                      <thead>
-                        <tr>
-                          <th className='px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase bg-gray-50'>
-                            Transaction
-                          </th>
-                          <th className='px-6 py-3 text-xs font-medium tracking-wider text-right text-gray-500 uppercase bg-gray-50'>
-                            Amount
-                          </th>
-                          <th className='hidden px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase bg-gray-50 md:block'>
-                            Status
-                          </th>
-                          <th className='px-6 py-3 text-xs font-medium tracking-wider text-right text-gray-500 uppercase bg-gray-50'>
-                            Date
-                          </th>
-                        </tr>
-                      </thead>
-                      <tbody className='bg-white divide-y divide-gray-200'>
-                        {transactions.map((transaction) => (
-                          <tr key={transaction.id} className='bg-white'>
-                            <td className='w-full px-6 py-4 text-sm text-gray-900 max-w-0 whitespace-nowrap'>
-                              <div className='flex'>
-                                <a
-                                  href={transaction.href}
-                                  className='inline-flex space-x-2 text-sm truncate group'
-                                >
-                                  <CashIcon
-                                    className='flex-shrink-0 w-5 h-5 text-gray-400 group-hover:text-gray-500'
+            {/* Projects table (small breakpoint and up) */}
+            <div className='hidden mt-8 sm:block'>
+              <div className='inline-block min-w-full align-middle border-b border-gray-200'>
+                <table className='min-w-full'>
+                  <thead>
+                    <tr className='border-t border-gray-200'>
+                      <th className='px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50'>
+                        <span className='lg:pl-2'>Kelas</span>
+                      </th>
+                      <th className='px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50'>
+                        Instructor
+                      </th>
+                      <th className='hidden px-6 py-3 text-xs font-medium tracking-wider text-right text-gray-500 uppercase border-b border-gray-200 md:table-cell bg-gray-50'>
+                        Last updated
+                      </th>
+                      <th className='py-3 pr-6 text-xs font-medium tracking-wider text-right text-gray-500 uppercase border-b border-gray-200 bg-gray-50' />
+                    </tr>
+                  </thead>
+                  <tbody className='bg-white divide-y divide-gray-100'>
+                    {projects.map((project) => (
+                      <tr key={project.id}>
+                        <td className='w-full px-6 py-3 text-sm font-medium text-gray-900 max-w-0 whitespace-nowrap'>
+                          <div className='flex items-center space-x-3 lg:pl-2'>
+                            <div
+                              className={classNames(
+                                project.bgColorClass,
+                                'flex-shrink-0 w-2.5 h-2.5 rounded-full'
+                              )}
+                              aria-hidden='true'
+                            />
+                            <a
+                              href='#'
+                              className='truncate hover:text-gray-600'
+                            >
+                              <span>
+                                {project.title}{' '}
+                                <span className='font-normal text-gray-500'>
+                                  in {project.team}
+                                </span>
+                              </span>
+                            </a>
+                          </div>
+                        </td>
+                        <td className='px-6 py-3 text-sm font-medium text-gray-500'>
+                          <div className='flex items-center space-x-2'>
+                            <div className='flex flex-shrink-0 -space-x-1'>
+                              {project.members.map((member) => (
+                                <img
+                                  key={member.handle}
+                                  className='w-6 h-6 rounded-full max-w-none ring-2 ring-white'
+                                  src={member.imageUrl}
+                                  alt={member.name}
+                                />
+                              ))}
+                            </div>
+                            {project.totalMembers > project.members.length ? (
+                              <span className='flex-shrink-0 text-xs font-medium leading-5'>
+                                +{project.totalMembers - project.members.length}
+                              </span>
+                            ) : null}
+                          </div>
+                        </td>
+                        <td className='hidden px-6 py-3 text-sm text-right text-gray-500 md:table-cell whitespace-nowrap'>
+                          {project.lastUpdated}
+                        </td>
+                        <td className='pr-6'>
+                          <Menu
+                            as='div'
+                            className='relative flex items-center justify-end'
+                          >
+                            {({ open }) => (
+                              <>
+                                <Menu.Button className='inline-flex items-center justify-center w-8 h-8 text-gray-400 bg-white rounded-full hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500'>
+                                  <span className='sr-only'>Open options</span>
+                                  <DotsVerticalIcon
+                                    className='w-5 h-5'
                                     aria-hidden='true'
                                   />
-                                  <p className='text-gray-500 truncate group-hover:text-gray-900'>
-                                    {transaction.name}
-                                  </p>
-                                </a>
-                              </div>
-                            </td>
-                            <td className='px-6 py-4 text-sm text-right text-gray-500 whitespace-nowrap'>
-                              <span className='font-medium text-gray-900'>
-                                {transaction.amount}{' '}
-                              </span>
-                              {transaction.currency}
-                            </td>
-                            <td className='hidden px-6 py-4 text-sm text-gray-500 whitespace-nowrap md:block'>
-                              <span
-                                className={classNames(
-                                  statusStyles[transaction.status],
-                                  'inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium capitalize'
-                                )}
-                              >
-                                {transaction.status}
-                              </span>
-                            </td>
-                            <td className='px-6 py-4 text-sm text-right text-gray-500 whitespace-nowrap'>
-                              <time dateTime={transaction.datetime}>
-                                {transaction.date}
-                              </time>
-                            </td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                    {/* Pagination */}
-                    <nav
-                      className='flex items-center justify-between px-4 py-3 bg-white border-t border-gray-200 sm:px-6'
-                      aria-label='Pagination'
-                    >
-                      <div className='hidden sm:block'>
-                        <p className='text-sm text-gray-700'>
-                          Showing <span className='font-medium'>1</span> to{' '}
-                          <span className='font-medium'>10</span> of{' '}
-                          <span className='font-medium'>20</span> results
-                        </p>
-                      </div>
-                      <div className='flex justify-between flex-1 sm:justify-end'>
-                        <a
-                          href='#'
-                          className='relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50'
-                        >
-                          Previous
-                        </a>
-                        <a
-                          href='#'
-                          className='relative inline-flex items-center px-4 py-2 ml-3 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50'
-                        >
-                          Next
-                        </a>
-                      </div>
-                    </nav>
-                  </div>
-                </div>
+                                </Menu.Button>
+                                <Transition
+                                  show={open}
+                                  as={Fragment}
+                                  enter='transition ease-out duration-100'
+                                  enterFrom='transform opacity-0 scale-95'
+                                  enterTo='transform opacity-100 scale-100'
+                                  leave='transition ease-in duration-75'
+                                  leaveFrom='transform opacity-100 scale-100'
+                                  leaveTo='transform opacity-0 scale-95'
+                                >
+                                  <Menu.Items
+                                    static
+                                    className='absolute top-0 z-10 w-48 mx-3 mt-1 origin-top-right bg-white divide-y divide-gray-200 rounded-md shadow-lg right-7 ring-1 ring-black ring-opacity-5 focus:outline-none'
+                                  >
+                                    <div className='py-1'>
+                                      <Menu.Item>
+                                        {({ active }) => (
+                                          <UnstyledLink
+                                            href='/admin/edit'
+                                            className={classNames(
+                                              active
+                                                ? 'bg-gray-100 text-gray-900'
+                                                : 'text-gray-700',
+                                              'group flex items-center px-4 py-2 text-sm'
+                                            )}
+                                          >
+                                            <HiPencilAlt
+                                              className='w-5 h-5 mr-3 text-gray-400 group-hover:text-gray-500'
+                                              aria-hidden='true'
+                                            />
+                                            Edit
+                                          </UnstyledLink>
+                                        )}
+                                      </Menu.Item>
+                                      <Menu.Item>
+                                        {({ active }) => (
+                                          <a
+                                            href='#'
+                                            className={classNames(
+                                              active
+                                                ? 'bg-gray-100 text-gray-900'
+                                                : 'text-gray-700',
+                                              'group flex items-center px-4 py-2 text-sm'
+                                            )}
+                                          >
+                                            <HiDuplicate
+                                              className='w-5 h-5 mr-3 text-gray-400 group-hover:text-gray-500'
+                                              aria-hidden='true'
+                                            />
+                                            Duplicate
+                                          </a>
+                                        )}
+                                      </Menu.Item>
+                                      <Menu.Item>
+                                        {({ active }) => (
+                                          <a
+                                            href='#'
+                                            className={classNames(
+                                              active
+                                                ? 'bg-gray-100 text-gray-900'
+                                                : 'text-gray-700',
+                                              'group flex items-center px-4 py-2 text-sm'
+                                            )}
+                                          >
+                                            <HiUserAdd
+                                              className='w-5 h-5 mr-3 text-gray-400 group-hover:text-gray-500'
+                                              aria-hidden='true'
+                                            />
+                                            Share
+                                          </a>
+                                        )}
+                                      </Menu.Item>
+                                    </div>
+                                    <div className='py-1'>
+                                      <Menu.Item>
+                                        {({ active }) => (
+                                          <a
+                                            href='#'
+                                            className={classNames(
+                                              active
+                                                ? 'bg-gray-100 text-gray-900'
+                                                : 'text-gray-700',
+                                              'group flex items-center px-4 py-2 text-sm'
+                                            )}
+                                          >
+                                            <HiTrash
+                                              className='w-5 h-5 mr-3 text-gray-400 group-hover:text-gray-500'
+                                              aria-hidden='true'
+                                            />
+                                            Delete
+                                          </a>
+                                        )}
+                                      </Menu.Item>
+                                    </div>
+                                  </Menu.Items>
+                                </Transition>
+                              </>
+                            )}
+                          </Menu>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>
