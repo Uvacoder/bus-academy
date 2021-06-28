@@ -5,6 +5,7 @@ import SampleAvatar from '@/public/images/sample-avatar.png';
 
 import CustomLink from '@/components/CustomLink';
 import { classNames } from '@/lib/helper';
+import UnstyledLink from './UnstyledLink';
 
 export default function ClassCard({
   cart,
@@ -58,14 +59,25 @@ export default function ClassCard({
         ) : showPrice ? (
           <p className='text-lg font-bold'>Rp 50.000</p>
         ) : showReviewButton ? (
-          <CustomLink href='/review'>Beri Ulasan</CustomLink>
+          <CustomLink href='/kelas/review'>Beri Ulasan</CustomLink>
         ) : null}
       </div>
       {addToCart && (
-        <button className='inline-flex items-center gap-1 px-3 py-2 ml-auto text-sm font-medium text-white rounded-md hover:bg-sky-400 bg-sky-500'>
-          <HiOutlinePlus className='text-lg' />
-          <p>Tambah Ke Keranjang</p>
-        </button>
+        <div className='flex items-center justify-between w-full'>
+          <UnstyledLink
+            className='block text-sm font-bold underline text-sky-500 hover:text-sky-600'
+            href='/detail'
+          >
+            Lihat Detail
+          </UnstyledLink>
+          <UnstyledLink
+            href='/keranjang'
+            className='flex items-center gap-1 px-3 py-2 text-sm font-medium text-white rounded-md hover:bg-sky-400 bg-sky-500'
+          >
+            <HiOutlinePlus className='text-lg' />
+            <p>Tambah Ke Keranjang</p>
+          </UnstyledLink>
+        </div>
       )}
       {cart && (
         <button
