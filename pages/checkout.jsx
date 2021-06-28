@@ -19,7 +19,7 @@ export default function Checkout() {
         <section className=''>
           <div className='flex flex-col min-h-screen py-16 mt-16 layout'>
             <h1 className='text-center'>Pembelian Kelas</h1>
-            <article className='grid grid-cols-[1fr,2fr] gap-12 mt-16'>
+            <article className='grid grid-cols-1 md:grid-cols-[1fr,2fr] gap-12 mt-16'>
               <aside>
                 <div className='flex flex-col gap-4'>
                   <ClassCard />
