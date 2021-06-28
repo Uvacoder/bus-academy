@@ -60,7 +60,7 @@ export default function Checkout() {
                     <span className='inline-block min-w-[80%] text-right'>
                       Total
                     </span>{' '}
-                    <span className='ml-auto'>Rp 110.000</span>
+                    <span className='ml-auto'>Rp 90.000</span>
                   </div>
                   <div className='flex justify-end gap-2 mt-4'>
                     <button
