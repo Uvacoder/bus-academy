@@ -15,7 +15,7 @@ export default function Kelas() {
       <main>
         <section className=''>
           <div className='flex flex-col min-h-screen py-16 mt-16 layout'>
-            <h1 className='text-center'>Kelas Non Live</h1>
+            <h1 className='text-center'>Kelas Live</h1>
             <article className='grid grid-cols-1 md:grid-cols-[1fr,2fr] gap-12 mt-16'>
               <aside>
                 <div className='flex flex-col gap-4'>
