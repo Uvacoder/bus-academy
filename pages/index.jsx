@@ -63,28 +63,15 @@ const metrics = [
 ];
 const footerNavigation = {
   solutions: [
-    { name: 'Marketing', href: '#' },
-    { name: 'Analytics', href: '#' },
-    { name: 'Commerce', href: '#' },
-    { name: 'Insights', href: '#' },
+    { name: 'Cari Kelas', href: '/cari-kelas' },
+    { name: 'Akses Kelas', href: '/akses-kelas' },
+    { name: 'Lihat Keranjang', href: '/keranjang' },
   ],
   support: [
-    { name: 'Pricing', href: '#' },
-    { name: 'Documentation', href: '#' },
-    { name: 'Guides', href: '#' },
-    { name: 'API Status', href: '#' },
-  ],
-  company: [
-    { name: 'About', href: '#' },
-    { name: 'Blog', href: '#' },
-    { name: 'Jobs', href: '#' },
-    { name: 'Press', href: '#' },
-    { name: 'Partners', href: '#' },
-  ],
-  legal: [
-    { name: 'Claim', href: '#' },
-    { name: 'Privacy', href: '#' },
-    { name: 'Terms', href: '#' },
+    { name: 'Profil', href: '/profile' },
+    { name: 'Riwayat Pembelian', href: '/riwayat' },
+    { name: 'Login', href: '/login' },
+    { name: 'Register', href: '/register' },
   ],
   social: [
     {
@@ -391,70 +378,34 @@ export default function LandingPage() {
                 <div className='md:grid md:grid-cols-2 md:gap-8'>
                   <div>
                     <h3 className='text-sm font-semibold tracking-wider text-gray-400 uppercase'>
-                      Solutions
+                      Kelas
                     </h3>
                     <ul className='mt-4 space-y-4'>
                       {footerNavigation.solutions.map((item) => (
                         <li key={item.name}>
-                          <a
+                          <UnstyledLink
                             href={item.href}
                             className='text-base text-gray-500 hover:text-gray-900'
                           >
                             {item.name}
-                          </a>
+                          </UnstyledLink>
                         </li>
                       ))}
                     </ul>
                   </div>
                   <div className='mt-12 md:mt-0'>
                     <h3 className='text-sm font-semibold tracking-wider text-gray-400 uppercase'>
-                      Support
+                      Profil
                     </h3>
                     <ul className='mt-4 space-y-4'>
                       {footerNavigation.support.map((item) => (
                         <li key={item.name}>
-                          <a
+                          <UnstyledLink
                             href={item.href}
                             className='text-base text-gray-500 hover:text-gray-900'
                           >
                             {item.name}
-                          </a>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-                <div className='md:grid md:grid-cols-2 md:gap-8'>
-                  <div>
-                    <h3 className='text-sm font-semibold tracking-wider text-gray-400 uppercase'>
-                      Company
-                    </h3>
-                    <ul className='mt-4 space-y-4'>
-                      {footerNavigation.company.map((item) => (
-                        <li key={item.name}>
-                          <a
-                            href={item.href}
-                            className='text-base text-gray-500 hover:text-gray-900'
-                          >
-                            {item.name}
-                          </a>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  <div className='mt-12 md:mt-0'>
-                    <h3 className='text-sm font-semibold tracking-wider text-gray-400 uppercase'>
-                      Legal
-                    </h3>
-                    <ul className='mt-4 space-y-4'>
-                      {footerNavigation.legal.map((item) => (
-                        <li key={item.name}>
-                          <a
-                            href={item.href}
-                            className='text-base text-gray-500 hover:text-gray-900'
-                          >
-                            {item.name}
-                          </a>
+                          </UnstyledLink>
                         </li>
                       ))}
                     </ul>
