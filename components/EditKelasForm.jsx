@@ -61,6 +61,16 @@ export default function EditKelasForm({ defaultValues }) {
                 }}
               />
             </div>
+            <div>
+              <Input
+                label='Kategori Kelas'
+                id='kategori_kelas'
+                type='text'
+                validation={{
+                  required: 'Kategori kelas tidak boleh kosong',
+                }}
+              />
+            </div>
             <Select
               label='Jenis Kelas'
               id='jenis'

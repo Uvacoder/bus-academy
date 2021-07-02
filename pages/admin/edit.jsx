@@ -55,7 +55,7 @@ const projects = [
     id: 1,
     title: 'Public Speaking',
     initials: 'GA',
-    team: 'Soft Skills',
+    team: 'Softskills',
     members: [
       {
         name: 'Dries Vincent',
@@ -463,6 +463,7 @@ export default function Edit() {
                   nama_kelas: 'Public Speaking for Beginners',
                   nama_instruktur: 'Jack Frost',
                   harga_kelas: '200.000',
+                  kategori_kelas: 'Softskills',
                   jenis: 'Live',
                   deskripsi_kelas:
                     'Public speaking adalah hal yang menyenangkan',

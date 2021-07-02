@@ -55,7 +55,7 @@ const projects = [
     id: 1,
     title: 'Public Speaking',
     initials: 'GA',
-    team: 'Soft Skills',
+    team: 'Softskills',
     members: [
       {
         name: 'Dries Vincent',
