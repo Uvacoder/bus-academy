@@ -13,7 +13,7 @@ const transactions = [
   {
     id: 1,
     name: 'Manage Public Speaking & Bercocok Tanam',
-    href: '/riwayat/pembelian',
+    href: '/riwayat/pembelian/success',
     amount: 'Rp 150.000',
     currency: 'IDR',
     status: 'success',
@@ -23,7 +23,7 @@ const transactions = [
   {
     id: 2,
     name: 'TOEFL IBT 100%',
-    href: '/riwayat/pembelian',
+    href: '/riwayat/pembelian/processing',
     amount: 'Rp 110.000',
     currency: 'IDR',
     status: 'processing',
@@ -33,7 +33,7 @@ const transactions = [
   {
     id: 3,
     name: 'Strive challenges with trigger',
-    href: '/riwayat/pembelian',
+    href: '/riwayat/pembelian/cancelled',
     amount: 'Rp 50.000',
     currency: 'IDR',
     status: 'cancelled',
@@ -60,7 +60,7 @@ export default function Riwayat() {
       <main>
         <section className=''>
           <div className='flex flex-col min-h-screen py-16 mt-16 layout'>
-            <h1 className='text-center'>Invoice Pembelian Kelas</h1>
+            <h1 className='text-center'>Riwayat Pembelian Kelas</h1>
             <table className='min-w-full mt-8 divide-y divide-gray-200'>
               <thead>
                 <tr>
