@@ -59,9 +59,18 @@ export default function Kelas() {
                         <Input
                           label='Rating kelas (1-5)'
                           id='rating_kelas'
-                          type='text'
+                          type='number'
+                          step='0.1'
                           validation={{
                             required: 'Rating kelas tidak boleh kosong',
+                            min: {
+                              value: 0,
+                              message: 'Rating minimal 0',
+                            },
+                            max: {
+                              value: 5,
+                              message: 'Rating maksimal 5',
+                            },
                           }}
                         />
                       </div>
