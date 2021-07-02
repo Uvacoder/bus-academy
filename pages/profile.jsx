@@ -1,5 +1,6 @@
 import { FormProvider, useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
+import toast from 'react-hot-toast';
 
 import Seo from '@/components/Seo';
 import Nav from '@/components/Nav';
@@ -28,7 +29,7 @@ export default function Register() {
 
   function onSubmit(data) {
     console.log(data);
-    router.push('/');
+    toast.success('Profil berhasil diperbaharui');
   }
 
   return (

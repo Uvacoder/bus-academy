@@ -1,5 +1,6 @@
 import { FormProvider, useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
+import toast from 'react-hot-toast';
 
 import Seo from '@/components/Seo';
 import Nav from '@/components/Nav';
@@ -16,6 +17,7 @@ export default function Register() {
 
   function onSubmit(data) {
     console.log(data);
+    toast.success('Registrasi berhasil');
     router.push('/');
   }
 
@@ -101,7 +103,7 @@ export default function Register() {
                         label='Nomor Telepon'
                         id='telepon'
                         type='text'
-                        placeholder='+62 851 1234 4321'
+                        placeholder='+6285112344321'
                         validation={{
                           required: 'Nomor telepon tidak boleh kosong',
                           pattern: {

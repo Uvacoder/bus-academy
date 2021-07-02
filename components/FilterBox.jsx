@@ -1,6 +1,7 @@
 import { FormProvider, useForm } from 'react-hook-form';
 import { HiSearch } from 'react-icons/hi';
 import { useRouter } from 'next/router';
+import toast from 'react-hot-toast';
 
 const categoryFilter = [
   { id: 'softskills', label: 'Softskills' },
@@ -48,7 +49,10 @@ export default function FilterBox() {
               <label htmlFor={item.id}>{item.label}</label>
             </div>
           ))}
-          <button className='inline-flex items-center h-10 gap-1 px-3 py-2 mb-1 text-sm font-medium text-white rounded-md hover:bg-sky-400 bg-sky-500'>
+          <button
+            onClick={() => toast.success('Filter berhasil digunakan')}
+            className='inline-flex items-center h-10 gap-1 px-3 py-2 mb-1 text-sm font-medium text-white rounded-md hover:bg-sky-400 bg-sky-500'
+          >
             Filter Pilihan
           </button>
         </div>

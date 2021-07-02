@@ -8,6 +8,7 @@ function MyApp({ Component, pageProps }) {
       <div>
         <Toaster
           reverseOrder={false}
+          position='bottom-right'
           toastOptions={{
             style: {
               borderRadius: '8px',

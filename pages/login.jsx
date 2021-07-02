@@ -1,6 +1,7 @@
 import { FormProvider, useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
+import toast from 'react-hot-toast';
 
 import logo from '@/public/images/logo.png';
 
@@ -16,6 +17,7 @@ export default function Example() {
 
   function onSubmit(data) {
     console.log(data);
+    toast.success('Login berhasil');
     router.push('/');
   }
   return (
