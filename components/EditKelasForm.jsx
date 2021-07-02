@@ -22,7 +22,7 @@ export default function EditKelasForm({ defaultValues }) {
   }
 
   return (
-    <div className='px-12 mt-8'>
+    <div className='mt-8'>
       <FormProvider {...methods}>
         <form onSubmit={handleSubmit(onSubmit)}>
           <h3>Informasi Kelas</h3>

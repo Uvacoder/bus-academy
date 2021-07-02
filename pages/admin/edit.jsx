@@ -456,8 +456,8 @@ export default function Edit() {
                 </div>
               </div>
             </div>
-            <div className='mt-8'>
-              <h2 className='px-12'>Edit kelas</h2>
+            <div className='max-w-6xl px-4 mx-auto mt-8 sm:px-6 lg:px-8'>
+              <h2>Edit kelas</h2>
               <EditKelasForm
                 defaultValues={{
                   nama_kelas: 'Public Speaking for Beginners',
