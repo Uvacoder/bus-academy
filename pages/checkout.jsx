@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 
 import caraPembayaranImg from '@/public/images/cara-pembayaran.jpg';
@@ -10,6 +10,11 @@ import ClassCard from '@/components/ClassCard';
 
 export default function Checkout() {
   const router = useRouter();
+  const [token, setToken] = useState('dca5a278-534c-4d81-9e7f-ae01b416434e');
+
+  const onTokenChange = (e) => {
+    setToken(e.target.value);
+  };
 
   useEffect(() => {
     //change this to the script source you want to load, for example this is snap.js sandbox env
@@ -89,14 +94,23 @@ export default function Checkout() {
                       Batal
                     </button>
                     <button
-                      onClick={() =>
-                        window.snap.pay('dca5a278-534c-4d81-9e7f-ae01b416434e')
-                      }
+                      onClick={() => window.snap.pay(token)}
                       className='inline-flex items-center h-10 gap-1 px-3 py-2 text-sm font-medium text-white rounded-md hover:bg-sky-400 bg-sky-500'
                     >
                       Bayar Sekarang
                     </button>
                   </div>
+                </div>
+                <div className='mt-8'>
+                  <label htmlFor='token'>
+                    TOKEN (HANYA DITAMPILKAN PADA TAHAP DEVELOPMENT)
+                  </label>
+                  <input
+                    type='text'
+                    name='token'
+                    value={token}
+                    onChange={onTokenChange}
+                  />
                 </div>
               </main>
             </article>
