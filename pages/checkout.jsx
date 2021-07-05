@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 
 import caraPembayaranImg from '@/public/images/cara-pembayaran.jpg';
@@ -9,6 +10,24 @@ import ClassCard from '@/components/ClassCard';
 
 export default function Checkout() {
   const router = useRouter();
+
+  useEffect(() => {
+    //change this to the script source you want to load, for example this is snap.js sandbox env
+    const midtransScriptUrl = 'https://app.sandbox.midtrans.com/snap/snap.js';
+    //change this according to your client-key
+    const myMidtransClientKey = 'SB-Mid-client-ZU2vc4eDnU9T4qAV';
+
+    let scriptTag = document.createElement('script');
+    scriptTag.src = midtransScriptUrl;
+    // optional if you want to set script attribute
+    // for example snap.js have data-client-key attribute
+    scriptTag.setAttribute('data-client-key', myMidtransClientKey);
+
+    document.body.appendChild(scriptTag);
+    return () => {
+      document.body.removeChild(scriptTag);
+    };
+  }, []);
 
   return (
     <>
@@ -69,7 +88,12 @@ export default function Checkout() {
                     >
                       Batal
                     </button>
-                    <button className='inline-flex items-center h-10 gap-1 px-3 py-2 text-sm font-medium text-white rounded-md hover:bg-sky-400 bg-sky-500'>
+                    <button
+                      onClick={() =>
+                        window.snap.pay('dca5a278-534c-4d81-9e7f-ae01b416434e')
+                      }
+                      className='inline-flex items-center h-10 gap-1 px-3 py-2 text-sm font-medium text-white rounded-md hover:bg-sky-400 bg-sky-500'
+                    >
                       Bayar Sekarang
                     </button>
                   </div>

@@ -1,0 +1,20 @@
+	curl -X POST \
+	  https://app.sandbox.midtrans.com/snap/v1/transactions \
+	  -H 'Accept: application/json'\
+	  -H 'Authorization: Basic U0ItTWlkLXNlcnZlci1wa3g4NENNRUhVQUlGbzRFZjVDR2hPaFo6' \
+	  -H 'Content-Type: application/json' \
+	  -d '{
+	    "transaction_details": {
+	        "order_id": "YOUR-ORDERID-123457",
+	        "gross_amount": 90000
+	    },
+	    "credit_card":{
+	        "secure" : true
+	    },
+	    "customer_details": {
+	        "first_name": "Theodorus",
+	        "last_name": "Clarence",
+	        "email": "theodorus@example.com",
+	        "phone": "08111222333"
+	    }
+	}'

@@ -2790,6 +2790,11 @@ react-lite-youtube-embed@^2.0.3:
   resolved "https://registry.yarnpkg.com/react-lite-youtube-embed/-/react-lite-youtube-embed-2.0.3.tgz#24a272e4832826252f98a4b122b8c50a25dd117f"
   integrity sha512-jeNw1i1LROdYVoxBiVRBNoqddzP91S+V84Z14Sralbw+0IWkDNo70xLD2Suk6j+es+h8y3/WykeiGiPw/THZQw==
 
+react-midtrans@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/react-midtrans/-/react-midtrans-1.0.2.tgz#44eff83cdf54affc7ff303d14e569679f21c161e"
+  integrity sha512-h/Kp8xSl+qh44ZbLep31UCvRiS9gYnculjhA14W1TWZlrGflII3oY+zHA5G27TrS643ksm/Y8CFC/+qcMAgCTg==
+
 react-onclickoutside@^6.10.0:
   version "6.11.2"
   resolved "https://registry.yarnpkg.com/react-onclickoutside/-/react-onclickoutside-6.11.2.tgz#790e2100b9a3589eefca1404ecbf0476b81b7928"
