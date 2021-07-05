@@ -28,6 +28,7 @@ import logo from '@/public/images/logo.png';
 import { classNames } from '@/lib/helper';
 import UnstyledLink from '@/components/UnstyledLink';
 import Seo from '@/components/Seo';
+import ChatAdmin from '@/components/ChatAdmin';
 
 const navigation = [
   { name: 'Home', href: '/admin', icon: HomeIcon, current: true },
@@ -56,7 +57,7 @@ const transactions = [
   {
     id: 1,
     name: 'Pembayaran a\\n  Jessica Tasyanita',
-    href: '#',
+    href: '/riwayat/pembelian/success',
     amount: 'Rp 150.000',
     currency: 'IDR',
     status: 'success',
@@ -66,7 +67,7 @@ const transactions = [
   {
     id: 2,
     name: 'Pembayaran a\\n  Clarence',
-    href: '#',
+    href: '/riwayat/pembelian/processing',
     amount: 'Rp 110.000',
     currency: 'IDR',
     status: 'processing',
@@ -76,10 +77,10 @@ const transactions = [
   {
     id: 3,
     name: 'Pembayaran a\\n  Nevin',
-    href: '#',
+    href: '/riwayat/pembelian/cancelled',
     amount: 'Rp 50.000',
     currency: 'IDR',
-    status: 'success',
+    status: 'cancelled',
     date: 'July 12, 2021',
     datetime: '2021-07-12',
   },
@@ -98,6 +99,7 @@ export default function Example() {
     <>
       <Seo title='Pembelian | Admin' />
 
+      <ChatAdmin />
       <div className='flex h-screen overflow-hidden bg-gray-100'>
         <Transition.Root show={sidebarOpen} as={Fragment}>
           <Dialog
@@ -497,6 +499,8 @@ export default function Example() {
                     <li key={transaction.id}>
                       <a
                         href={transaction.href}
+                        target='_blank'
+                        rel='noopener noreferrer'
                         className='block px-4 py-4 bg-white hover:bg-gray-50'
                       >
                         <span className='flex items-center space-x-4'>
@@ -578,6 +582,8 @@ export default function Example() {
                                 <div className='flex'>
                                   <a
                                     href={transaction.href}
+                                    target='_blank'
+                                    rel='noopener noreferrer'
                                     className='inline-flex space-x-2 text-sm truncate group'
                                   >
                                     <CashIcon
