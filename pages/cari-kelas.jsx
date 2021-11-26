@@ -24,18 +24,18 @@ export default function Keranjang() {
               {searchTerm ? `Pencarian tentang "${searchTerm}"` : 'Cari Kelas'}
             </h1>
             <div className='grid grid-cols-1 gap-4 mt-16 md:grid-cols-3'>
-              <ClassCard showPrice addToCart />
-              <ClassCard showPrice addToCart isLive />
+              <ClassCard id='1' showPrice addToCart />
+              <ClassCard id='2' showPrice addToCart isLive />
               <FilterBox />
-              <ClassCard showPrice addToCart isLive />
-              <ClassCard showPrice addToCart />
-              <ClassCard showPrice addToCart isLive />
-              <ClassCard showPrice addToCart isLive />
-              <ClassCard showPrice addToCart />
-              <ClassCard showPrice addToCart isLive />
-              <ClassCard showPrice addToCart isLive />
-              <ClassCard showPrice addToCart />
-              <ClassCard showPrice addToCart isLive />
+              <ClassCard id='3' showPrice addToCart isLive />
+              <ClassCard id='4' showPrice addToCart />
+              <ClassCard id='5' showPrice addToCart isLive />
+              <ClassCard id='6' showPrice addToCart isLive />
+              <ClassCard id='7' showPrice addToCart />
+              <ClassCard id='8' showPrice addToCart isLive />
+              <ClassCard id='9' showPrice addToCart isLive />
+              <ClassCard id='10' showPrice addToCart />
+              <ClassCard id='11' showPrice addToCart isLive />
             </div>
             <Pagination />
           </div>

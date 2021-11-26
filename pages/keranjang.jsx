@@ -7,6 +7,7 @@ import Input from '@/components/Input';
 import UnstyledLink from '@/components/UnstyledLink';
 import ClassCard from '@/components/ClassCard';
 import { HiOutlineCheckCircle } from 'react-icons/hi';
+import useCartStore from '@/store/CartStore';
 
 export default function Keranjang() {
   const methods = useForm();
@@ -16,18 +17,12 @@ export default function Keranjang() {
     setCouponApplied(data.coupon);
   }
 
-  const [cart, setCart] = useState([
-    { id: 1, isLive: false },
-    { id: 2, isLive: true },
-    { id: 3, isLive: false },
-  ]);
+  const carts = useCartStore((state) => state.carts);
+  const removeItem = useCartStore((state) => state.removeItem);
+
   const [couponApplied, setCouponApplied] = useState(null);
 
-  function removeCart(id) {
-    setCart((prev) => prev.filter((kelas) => kelas.id !== id));
-  }
-
-  const totalPrice = cart.length * 50 - (couponApplied ? 10 : 0);
+  const totalPrice = carts.length * 50 - (couponApplied ? 10 : 0);
 
   return (
     <>
@@ -38,25 +33,25 @@ export default function Keranjang() {
         <section className=''>
           <div className='flex flex-col min-h-screen py-16 mt-16 layout'>
             <h1 className='text-center'>Keranjang Pembelian</h1>
-            {cart.length === 0 ? (
+            {carts.length === 0 ? (
               <h3>Keranjang anda kosong</h3>
             ) : (
               <>
                 <div className='grid grid-cols-1 gap-4 mt-16 md:grid-cols-3'>
-                  {cart.map((kelas) => (
+                  {carts.map((kelas) => (
                     <ClassCard
                       cart
                       key={kelas.id}
                       detail={kelas}
                       isLive={kelas.isLive}
-                      onRemove={removeCart}
+                      onRemove={removeItem}
                       showPrice
                     />
                   ))}
                 </div>
                 <h3 className='mt-8 font-semibold'>Rincian Pembelian</h3>
                 <div className='mt-2 space-y-2'>
-                  {cart.map((item) => (
+                  {carts.map((item) => (
                     <div className='flex justify-between' key={item.id}>
                       <span className='inline-block min-w-[80%]'>
                         Kelas – Manage your way with great public speaking
@@ -103,9 +98,9 @@ export default function Keranjang() {
             )}
             <h2 className='mt-12'>Kelas yang ramai dibeli</h2>
             <div className='grid grid-cols-1 gap-4 mt-8 md:grid-cols-3'>
-              <ClassCard addToCart showPrice />
-              <ClassCard addToCart showPrice />
-              <ClassCard addToCart showPrice />
+              <ClassCard id='12' addToCart showPrice />
+              <ClassCard id='13' addToCart showPrice />
+              <ClassCard id='14' addToCart showPrice />
             </div>
           </div>
         </section>

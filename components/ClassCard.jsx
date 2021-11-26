@@ -1,5 +1,10 @@
 import Image from 'next/image';
-import { HiOutlineCalendar, HiOutlinePlus, HiOutlineX } from 'react-icons/hi';
+import {
+  HiOutlineCalendar,
+  HiOutlineMinus,
+  HiOutlinePlus,
+  HiOutlineX,
+} from 'react-icons/hi';
 import toast from 'react-hot-toast';
 
 import SampleAvatar from '@/public/images/sample-avatar.png';
@@ -7,6 +12,7 @@ import SampleAvatar from '@/public/images/sample-avatar.png';
 import CustomLink from '@/components/CustomLink';
 import { classNames } from '@/lib/helper';
 import UnstyledLink from './UnstyledLink';
+import useCartStore from '@/store/CartStore';
 
 export default function ClassCard({
   cart,
@@ -17,7 +23,31 @@ export default function ClassCard({
   showReviewButton,
   onRemove,
   detail,
+  id,
 }) {
+  const carts = useCartStore((state) => state.carts);
+  const [addItem, removeItem] = useCartStore((state) => [
+    state.addItem,
+    state.removeItem,
+  ]);
+
+  const isInCart = carts.findIndex((item) => item.id === id) !== -1;
+
+  const handleAddToCart = () => {
+    addItem({
+      id,
+      isLive,
+    });
+
+    toast.success('Berhasil ditambahkan ke keranjang');
+  };
+
+  const removeFromCart = () => {
+    removeItem(id);
+
+    toast.success('Berhasil dihapus dari keranjang');
+  };
+
   return (
     <div className='relative flex flex-col items-start p-4 space-y-2 border rounded-md border-sky-500'>
       <Image src='/images/sample.jpg' width={709} height={383} />
@@ -71,13 +101,25 @@ export default function ClassCard({
           >
             Lihat Detail
           </UnstyledLink>
-          <button
-            onClick={() => toast.success('Berhasil ditambahkan ke keranjang')}
-            className='flex items-center gap-1 px-3 py-2 text-sm font-medium text-white rounded-md hover:bg-sky-400 bg-sky-500'
-          >
-            <HiOutlinePlus className='text-lg' />
-            <p>Tambah Ke Keranjang</p>
-          </button>
+          {isInCart ? (
+            <button
+              id='hapus'
+              onClick={removeFromCart}
+              className='flex items-center gap-1 px-3 py-2 text-sm font-medium text-white bg-red-500 rounded-md hover:bg-red-400'
+            >
+              <HiOutlineMinus className='text-lg' />
+              <p>Hapus Dari Keranjang</p>
+            </button>
+          ) : (
+            <button
+              id='tambah'
+              onClick={handleAddToCart}
+              className='flex items-center gap-1 px-3 py-2 text-sm font-medium text-white rounded-md hover:bg-sky-400 bg-sky-500'
+            >
+              <HiOutlinePlus className='text-lg' />
+              <p>Tambah Ke Keranjang</p>
+            </button>
+          )}
         </div>
       )}
       {cart && (

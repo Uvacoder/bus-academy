@@ -7,6 +7,7 @@ import caraPembayaranImg from '@/public/images/cara-pembayaran.jpg';
 import Seo from '@/components/Seo';
 import Nav from '@/components/Nav';
 import ClassCard from '@/components/ClassCard';
+import useCartStore from '@/store/CartStore';
 
 export default function Checkout() {
   const router = useRouter();
@@ -33,6 +34,9 @@ export default function Checkout() {
       document.body.removeChild(scriptTag);
     };
   }, []);
+
+  const carts = useCartStore((state) => state.carts);
+  const removeItem = useCartStore((state) => state.removeItem);
 
   return (
     <>
@@ -61,18 +65,14 @@ export default function Checkout() {
                 </figure>
                 <h3 className='mt-8 font-semibold'>Rincian Pembelian</h3>
                 <div className='mt-2 space-y-2'>
-                  <div className='flex justify-between'>
-                    <span className='inline-block min-w-[80%]'>
-                      Kelas – Manage your way with great public speaking
-                    </span>{' '}
-                    <span className='ml-auto'>Rp 50.000</span>
-                  </div>
-                  <div className='flex justify-between'>
-                    <span className='inline-block min-w-[80%]'>
-                      Kelas – Menulis essay untuk beasiswa
-                    </span>{' '}
-                    <span className='ml-auto'>Rp 50.000</span>
-                  </div>
+                  {carts.map((item) => (
+                    <div className='flex justify-between' key={item.id}>
+                      <span className='inline-block min-w-[80%]'>
+                        Kelas – Manage your way with great public speaking
+                      </span>{' '}
+                      <span className='ml-auto'>Rp 50.000</span>
+                    </div>
+                  ))}
                   <div className='flex justify-between'>
                     <span className='inline-block min-w-[80%]'>
                       Kupon ACAD12
