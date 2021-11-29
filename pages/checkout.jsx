@@ -8,6 +8,7 @@ import Seo from '@/components/Seo';
 import Nav from '@/components/Nav';
 import ClassCard from '@/components/ClassCard';
 import useCartStore from '@/store/CartStore';
+import useClassStore from '@/store/useClassStore';
 
 export default function Checkout() {
   const router = useRouter();
@@ -38,6 +39,16 @@ export default function Checkout() {
   const carts = useCartStore((state) => state.carts);
   const removeItem = useCartStore((state) => state.removeItem);
 
+  //#region  //*=========== Get Classes ===========
+  const classes = useClassStore((state) => state.classes);
+  const cartClass = carts.reduce(
+    (a, cart) => [...a, classes.find((cls) => cls.id === cart.id)],
+    []
+  );
+  //#endregion  //*======== Get Classes ===========
+
+  const totalPrice = cartClass.reduce((a, b) => a + parseInt(b.price), 0) - 10;
+
   return (
     <>
       <Seo />
@@ -50,8 +61,9 @@ export default function Checkout() {
             <article className='grid grid-cols-1 md:grid-cols-[1fr,2fr] gap-12 mt-16'>
               <aside>
                 <div className='flex flex-col gap-4'>
-                  <ClassCard />
-                  <ClassCard />
+                  {cartClass.slice(0, 2).map((cl) => (
+                    <ClassCard data={cl} isLive={cl.isLive} id={cl.id} />
+                  ))}
                 </div>
               </aside>
               <main>
@@ -65,18 +77,16 @@ export default function Checkout() {
                 </figure>
                 <h3 className='mt-8 font-semibold'>Rincian Pembelian</h3>
                 <div className='mt-2 space-y-2'>
-                  {carts.map((item) => (
+                  {cartClass.map((item) => (
                     <div className='flex justify-between' key={item.id}>
                       <span className='inline-block min-w-[80%]'>
-                        Kelas – Manage your way with great public speaking
+                        {item.title ?? 'Nama Kelas'}
                       </span>{' '}
-                      <span className='ml-auto'>Rp 50.000</span>
+                      <span className='ml-auto'>Rp {item.price}</span>
                     </div>
                   ))}
                   <div className='flex justify-between'>
-                    <span className='inline-block min-w-[80%]'>
-                      Kupon ACAD12
-                    </span>{' '}
+                    <span className='inline-block min-w-[80%]'>Kupon</span>{' '}
                     <span className='ml-auto'>- Rp 10.000</span>
                   </div>
                   <hr className='mt-2' />
@@ -84,7 +94,7 @@ export default function Checkout() {
                     <span className='inline-block min-w-[80%] text-right'>
                       Total
                     </span>{' '}
-                    <span className='ml-auto'>Rp 90.000</span>
+                    <span className='ml-auto'>Rp {totalPrice}.000</span>
                   </div>
                   <div className='flex justify-end gap-2 mt-4'>
                     <button

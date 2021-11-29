@@ -10,6 +10,7 @@ import UnstyledLink from '@/components/UnstyledLink';
 import ClassCard from '@/components/ClassCard';
 import Seo from '@/components/Seo';
 import ChatBox from '@/components/ChatBox';
+import useClassStore from '@/store/useClassStore';
 
 const features = [
   {
@@ -139,6 +140,8 @@ const footerNavigation = {
 };
 
 export default function LandingPage() {
+  const classes = useClassStore((state) => state.classes);
+
   return (
     <>
       <Seo />
@@ -239,12 +242,16 @@ export default function LandingPage() {
                 Kelas pilihan
               </h2>
               <div className='grid grid-cols-1 gap-4 mt-16 md:grid-cols-3'>
-                <ClassCard addToCart showPrice isLive />
-                <ClassCard addToCart showPrice />
-                <ClassCard addToCart showPrice isLive />
-                <ClassCard addToCart showPrice />
-                <ClassCard addToCart showPrice />
-                <ClassCard addToCart showPrice isLive />
+                {classes.slice(0, 6).map((cl) => (
+                  <ClassCard
+                    key={cl.id}
+                    data={cl}
+                    isLive={cl.isLive}
+                    id={cl.id}
+                    showPrice
+                    addToCart
+                  />
+                ))}
               </div>
             </div>
           </section>

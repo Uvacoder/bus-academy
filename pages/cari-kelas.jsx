@@ -6,11 +6,14 @@ import Input from '@/components/Input';
 import ClassCard from '@/components/ClassCard';
 import Pagination from '@/components/Pagination';
 import FilterBox from '@/components/FilterBox';
+import useClassStore from '@/store/useClassStore';
 
 export default function Keranjang() {
   const router = useRouter();
 
   const searchTerm = router.query?.search;
+
+  const classes = useClassStore((state) => state.classes);
 
   return (
     <>
@@ -24,18 +27,27 @@ export default function Keranjang() {
               {searchTerm ? `Pencarian tentang "${searchTerm}"` : 'Cari Kelas'}
             </h1>
             <div className='grid grid-cols-1 gap-4 mt-16 md:grid-cols-3'>
-              <ClassCard id='1' showPrice addToCart />
-              <ClassCard id='2' showPrice addToCart isLive />
+              {classes.slice(0, 2).map((cl) => (
+                <ClassCard
+                  key={cl.id}
+                  data={cl}
+                  isLive={cl.isLive}
+                  id={cl.id}
+                  showPrice
+                  addToCart
+                />
+              ))}
               <FilterBox />
-              <ClassCard id='3' showPrice addToCart isLive />
-              <ClassCard id='4' showPrice addToCart />
-              <ClassCard id='5' showPrice addToCart isLive />
-              <ClassCard id='6' showPrice addToCart isLive />
-              <ClassCard id='7' showPrice addToCart />
-              <ClassCard id='8' showPrice addToCart isLive />
-              <ClassCard id='9' showPrice addToCart isLive />
-              <ClassCard id='10' showPrice addToCart />
-              <ClassCard id='11' showPrice addToCart isLive />
+              {classes.slice(2).map((cl) => (
+                <ClassCard
+                  key={cl.id}
+                  data={cl}
+                  isLive={cl.isLive}
+                  id={cl.id}
+                  showPrice
+                  addToCart
+                />
+              ))}
             </div>
             <Pagination />
           </div>

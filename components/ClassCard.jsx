@@ -23,6 +23,7 @@ export default function ClassCard({
   showReviewButton,
   onRemove,
   detail,
+  data,
   id,
 }) {
   const carts = useCartStore((state) => state.carts);
@@ -50,7 +51,7 @@ export default function ClassCard({
 
   return (
     <div className='relative flex flex-col items-start p-4 space-y-2 border rounded-md border-sky-500'>
-      <Image src='/images/sample.jpg' width={709} height={383} />
+      <Image src={data?.img ?? '/images/sample.jpg'} width={709} height={383} />
       <div className='flex items-center justify-between w-full gap-4'>
         <span
           className={classNames(
@@ -67,28 +68,38 @@ export default function ClassCard({
           </span>
         )}
       </div>
-      <div>
+      <div className='!mb-6'>
         <h4 className='text-base'>
-          Manage your way with great public speaking!
+          {data?.title ?? 'Manage your way with great public speaking!'}
         </h4>
         <p className='text-sm text-gray-500'>
-          Public speaking adalah hal yang cukup signifikan dalam kehidupan
-          kerja, maka ayo tingkatkan!
+          {data?.description ??
+            'Public speaking adalah hal yang cukup signifikan dalam kehidupan kerja, maka ayo tingkatkan!'}
         </p>
       </div>
-      <div className='flex items-center justify-between w-full'>
+      <div className='flex items-center justify-between w-full !mt-auto'>
         <div className='flex items-center gap-1'>
-          <figure className='flex items-center w-8'>
-            <Image src={SampleAvatar} className='block' alt='avatar' />
+          <figure className='flex items-center w-8 overflow-hidden rounded-full'>
+            <Image
+              src={`https://i.pravatar.cc/150?u=${
+                data?.instructor ?? 'Jack Frost'
+              }`}
+              width={150}
+              height={150}
+              className='block'
+              alt='avatar'
+            />
           </figure>
-          <p className='text-sm text-gray-500'>Jack Frost</p>
+          <p className='text-sm text-gray-500'>
+            {data?.instructor ?? 'Jack Frost'}
+          </p>
         </div>
         {access ? (
           <CustomLink href={`/kelas/${isLive ? 'live' : 'non-live'}`}>
             Akses Kelas
           </CustomLink>
         ) : showPrice ? (
-          <p className='text-lg font-bold'>Rp 50.000</p>
+          <p className='text-lg font-bold'>Rp {data?.price ?? 50.0}</p>
         ) : showReviewButton ? (
           <CustomLink href='/kelas/review'>Beri Ulasan</CustomLink>
         ) : null}
