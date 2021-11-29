@@ -1,10 +1,11 @@
+import Layout from '@/components/layout/Layout';
 import '@/styles/globals.css';
 import 'react-datepicker/dist/react-datepicker.css';
 import { Toaster } from 'react-hot-toast';
 
 function MyApp({ Component, pageProps }) {
   return (
-    <>
+    <Layout>
       <div>
         <Toaster
           reverseOrder={false}
@@ -19,7 +20,7 @@ function MyApp({ Component, pageProps }) {
         />
       </div>
       <Component {...pageProps} />
-    </>
+    </Layout>
   );
 }
 

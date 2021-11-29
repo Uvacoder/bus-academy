@@ -17,6 +17,7 @@ import logo from '@/public/images/logo.png';
 import { classNames } from '@/lib/helper';
 
 import UnstyledLink from '@/components/UnstyledLink';
+import useCartStore from '@/store/CartStore';
 
 export default function Nav() {
   const { asPath, push } = useRouter();
@@ -25,12 +26,13 @@ export default function Nav() {
     push(`/cari-kelas?search=${data.search}`);
     reset();
   }
+  const carts = useCartStore((state) => state.carts);
 
   const navItems = [
     { label: 'Beranda', href: '/' },
     { label: 'Cari Kelas', href: '/cari-kelas' },
     { label: 'Akses Kelas', href: '/akses-kelas' },
-    { label: 'Keranjang', href: '/keranjang' },
+    { label: `Keranjang: ${carts.length}`, href: '/keranjang' },
   ];
 
   return (
