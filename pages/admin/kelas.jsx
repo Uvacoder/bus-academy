@@ -34,6 +34,7 @@ import { classNames } from '@/lib/helper';
 import UnstyledLink from '@/components/UnstyledLink';
 import KelasTable from '@/components/KelasTable';
 import Seo from '@/components/Seo';
+import useClassStore from '@/store/useClassStore';
 
 const navigation = [
   { name: 'Home', href: '/admin', icon: HomeIcon, current: false },
@@ -50,7 +51,7 @@ const navigation = [
 ];
 const secondaryNavigation = [];
 
-const projects = [
+const projectsOld = [
   {
     id: 1,
     title: 'Public Speaking',
@@ -110,6 +111,19 @@ const projects = [
 
 export default function KelolaKelas() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  const classes = useClassStore((state) => state.classes);
+  const projects = classes.map((cl) => ({
+    id: cl.id,
+    title: cl.title,
+    team: cl.isLive ? 'Live' : 'Non-Live',
+    instructor: cl.instructor,
+    imageUrl: `https://i.pravatar.cc/150?u=${cl?.instructor ?? 'Jack Frost'}`,
+    totalMembers: 1,
+    lastUpdated: 'December 1, 2021',
+    pinned: true,
+    bgColorClass: 'bg-pink-600',
+  }));
 
   return (
     <>

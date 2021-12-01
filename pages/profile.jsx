@@ -8,18 +8,24 @@ import Input from '@/components/Input';
 import DatePicker from '@/components/DatePicker';
 import TextArea from '@/components/TextArea';
 import Select from '@/components/Select';
-import { classNames } from '@/lib/helper';
+import { classNames, getFromLocalStorage } from '@/lib/helper';
 
 export default function Register() {
+  const parsedProfile = JSON.parse(getFromLocalStorage('academy-profile'));
+
+  const defaultValues = {
+    nama_lengkap: parsedProfile?.nama_lengkap ?? 'Clarence',
+    telepon: parsedProfile?.telepon ?? '+628515123235464',
+    tgl_lahir: parsedProfile?.tgl_lahir
+      ? new Date(parsedProfile?.tgl_lahir)
+      : new Date('2001-08-15'),
+    alamat: parsedProfile?.alamat ?? 'Jl. Cemara Tunggal No. 21',
+    provinsi: parsedProfile?.provinsi ?? 'DKI Jakarta',
+    kabkot: parsedProfile?.kabkot ?? 'Jakarta Utara',
+  };
+
   const methods = useForm({
-    defaultValues: {
-      nama_lengkap: 'Clarence',
-      telepon: '+628515123235464',
-      tgl_lahir: new Date('2001-08-15'),
-      alamat: 'Jl. Cemara Tunggal No. 21',
-      provinsi: 'DKI Jakarta',
-      kabkot: 'Jakarta Utara',
-    },
+    defaultValues,
   });
   const {
     handleSubmit,
@@ -29,6 +35,8 @@ export default function Register() {
 
   function onSubmit(data) {
     console.log(data);
+    // store to local storage
+    localStorage.setItem('academy-profile', JSON.stringify(data));
     toast.success('Profil berhasil diperbaharui');
   }
 

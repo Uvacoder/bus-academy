@@ -1,6 +1,7 @@
 import create from 'zustand';
 import { persist, devtools } from 'zustand/middleware';
 import produce from 'immer';
+import { immer } from '@/lib/zustand';
 
 const initialClass = [
   {
@@ -66,9 +67,19 @@ const initialClass = [
 const useClassStore = create(
   devtools(
     persist(
-      (set) => ({
+      immer((set) => ({
         classes: initialClass,
-      }),
+        addClass: (newClass) =>
+          set((state) => {
+            state.classes.push(newClass);
+          }),
+        removeClass: (id) =>
+          set((state) => {
+            state.classes = state.classes.filter(
+              (classItem) => classItem.id !== id
+            );
+          }),
+      })),
       {
         name: 'academy-classes',
       }

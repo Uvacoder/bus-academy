@@ -10,67 +10,23 @@ import {
 
 import { classNames } from '@/lib/helper';
 import UnstyledLink from './UnstyledLink';
+import useClassStore from '@/store/useClassStore';
 export default function KelasTable() {
-  const [projects, setProjects] = useState([
-    {
-      id: 1,
-      title: 'Public Speaking',
-      initials: 'GA',
-      team: 'Soft Skills',
-      members: [
-        {
-          name: 'Dries Vincent',
-          handle: 'driesvincent',
-          imageUrl:
-            'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-        },
-      ],
-      totalMembers: 1,
-      lastUpdated: 'March 17, 2020',
-      pinned: true,
-      bgColorClass: 'bg-pink-600',
-    },
-    {
-      id: 2,
-      title: 'React',
-      initials: 'GA',
-      team: 'Frontend Development',
-      members: [
-        {
-          name: 'Dries Vincent',
-          handle: 'driesvincent',
-          imageUrl:
-            'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-        },
-      ],
-      totalMembers: 1,
-      lastUpdated: 'March 17, 2020',
-      pinned: true,
-      bgColorClass: 'bg-pink-600',
-    },
-    {
-      id: 3,
-      title: 'Laravel',
-      initials: 'GA',
-      team: 'Backend Development',
-      members: [
-        {
-          name: 'Dries Vincent',
-          handle: 'driesvincent',
-          imageUrl:
-            'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-        },
-      ],
-      totalMembers: 1,
-      lastUpdated: 'March 17, 2020',
-      pinned: true,
-      bgColorClass: 'bg-pink-600',
-    },
-  ]);
+  const classes = useClassStore((state) => state.classes);
+  const addClass = useClassStore((state) => state.addClass);
+  const removeClass = useClassStore((state) => state.removeClass);
 
-  const removeProject = (id) => {
-    setProjects((prev) => prev.filter((project) => project.id !== id));
-  };
+  const projects = classes.map((cl) => ({
+    id: cl.id,
+    title: cl.title,
+    team: cl.isLive ? 'Live' : 'Non-Live',
+    instructor: cl.instructor,
+    imageUrl: `https://i.pravatar.cc/150?u=${cl?.instructor ?? 'Jack Frost'}`,
+    totalMembers: 1,
+    lastUpdated: 'December 1, 2021',
+    pinned: true,
+    bgColorClass: 'bg-pink-600',
+  }));
 
   const duplicateProject = (id) => {
     const newId = Math.max(...projects.map((project) => project.id)) + 1;
@@ -78,8 +34,8 @@ export default function KelasTable() {
       ...projects.find((project) => project.id === id),
       id: newId,
     };
-
-    setProjects((prev) => [...prev, newObj]);
+    // console.log(newObj);
+    addClass(newObj);
   };
 
   return (
@@ -108,20 +64,13 @@ export default function KelasTable() {
           <td className='px-6 py-3 text-sm font-medium text-gray-500'>
             <div className='flex items-center space-x-2'>
               <div className='flex flex-shrink-0 -space-x-1'>
-                {project.members.map((member) => (
-                  <img
-                    key={member.handle}
-                    className='w-6 h-6 rounded-full max-w-none ring-2 ring-white'
-                    src={member.imageUrl}
-                    alt={member.name}
-                  />
-                ))}
+                <img
+                  key={`${project.instructor}${project.id}`}
+                  className='w-6 h-6 rounded-full max-w-none ring-2 ring-white'
+                  src={project.imageUrl}
+                  alt={project.instructor}
+                />
               </div>
-              {project.totalMembers > project.members.length ? (
-                <span className='flex-shrink-0 text-xs font-medium leading-5'>
-                  +{project.totalMembers - project.members.length}
-                </span>
-              ) : null}
             </div>
           </td>
           <td className='hidden px-6 py-3 text-sm text-right text-gray-500 md:table-cell whitespace-nowrap'>
@@ -193,7 +142,7 @@ export default function KelasTable() {
                         <Menu.Item>
                           {({ active }) => (
                             <button
-                              onClick={() => removeProject(project.id)}
+                              onClick={() => removeClass(project.id)}
                               className={classNames(
                                 active
                                   ? 'bg-gray-100 text-gray-900'
