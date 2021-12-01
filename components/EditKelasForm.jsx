@@ -1,5 +1,6 @@
 import { FormProvider, useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
+import format from 'date-fns/format';
 
 import Seo from '@/components/Seo';
 import Nav from '@/components/Nav';
@@ -7,17 +8,40 @@ import Input from '@/components/Input';
 import DatePicker from '@/components/DatePicker';
 import TextArea from '@/components/TextArea';
 import Select from '@/components/Select';
+import useClassStore from '@/store/useClassStore';
+import toast from 'react-hot-toast';
 
 export default function EditKelasForm({ defaultValues }) {
   const methods = useForm({ defaultValues });
   const { handleSubmit, watch } = methods;
 
+  const classes = useClassStore((state) => state.classes);
+  const addClass = useClassStore((state) => state.addClass);
+
   const jenis = watch('jenis');
 
   const router = useRouter();
-
   function onSubmit(data) {
-    console.log(data);
+    const isLive = data.jenis === 'Live';
+
+    const newId = Math.max(...classes.map((cls) => cls.id)) + 1 + '';
+    const mappedData = {
+      id: newId,
+      title: data.nama_kelas,
+      description: data.deskripsi_kelas,
+      instructor: data.nama_instruktur,
+      price: data.harga_kelas,
+      isLive: isLive,
+      time: isLive
+        ? `${format(new Date(data.tgl_live), 'd MMM yyyy')}, 14:00 – 18:00 WIB`
+        : undefined,
+      img: `https://unsplash.it/709/383?id=${newId}`,
+      link_video: !isLive ? data.link_video : undefined,
+      link_zoom: data.link_zoom,
+      link_modul: isLive ? data.link_modul : undefined,
+    };
+    addClass(mappedData);
+    toast.success('Kelas berhasil ditambahkan');
     router.push('/admin/kelas');
   }
 
@@ -107,15 +131,6 @@ export default function EditKelasForm({ defaultValues }) {
                 />
               </div>
             )}
-            <div>
-              <label
-                htmlFor='file'
-                className='block text-sm font-normal text-gray-700'
-              >
-                File Foto
-              </label>
-              <input type='file' id='file' name='file' className='mt-2' />
-            </div>
           </div>
           <hr className='mt-8' />
 
