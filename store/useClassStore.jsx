@@ -16,6 +16,13 @@ const initialClass = [
     img: 'https://unsplash.it/709/383?id=1',
     link_modul: '/modul.pdf',
     link_zoom: 'https://zoom.us',
+    reviews: [
+      {
+        rating_kelas: '4',
+        ulasan: 'Keren banget coursenya!',
+        name: 'Clarence',
+      },
+    ],
   },
   {
     id: '2',
@@ -27,6 +34,9 @@ const initialClass = [
     img: 'https://unsplash.it/709/383?id=2',
     link_modul: '/modul.pdf',
     link_video: 'dHAbmoFHqgA',
+    reviews: [
+      { rating_kelas: '4', ulasan: 'Keren banget coursenya!', name: 'Jessica' },
+    ],
   },
   {
     id: '3',
@@ -40,6 +50,9 @@ const initialClass = [
     img: 'https://unsplash.it/709/383?id=3',
     link_modul: '/modul.pdf',
     link_zoom: 'https://zoom.us',
+    reviews: [
+      { rating_kelas: '4', ulasan: 'Keren banget coursenya!', name: 'Nevin' },
+    ],
   },
   {
     id: '4',
@@ -51,6 +64,9 @@ const initialClass = [
     img: 'https://unsplash.it/709/383?id=4',
     link_modul: '/modul.pdf',
     link_video: 'dHAbmoFHqgA',
+    reviews: [
+      { rating_kelas: '4', ulasan: 'Keren banget coursenya!', name: 'Fidhia' },
+    ],
   },
   {
     id: '5',
@@ -62,6 +78,13 @@ const initialClass = [
     img: 'https://unsplash.it/709/383?id=5',
     link_modul: '/modul.pdf',
     link_video: 'dHAbmoFHqgA',
+    reviews: [
+      {
+        rating_kelas: '4',
+        ulasan: 'Keren banget coursenya!',
+        name: 'Clarence',
+      },
+    ],
   },
   {
     id: '6',
@@ -73,6 +96,13 @@ const initialClass = [
     img: 'https://unsplash.it/709/383?id=6',
     link_modul: '/modul.pdf',
     link_video: 'dHAbmoFHqgA',
+    reviews: [
+      {
+        rating_kelas: '4',
+        ulasan: 'Keren banget coursenya!',
+        name: 'Clarence',
+      },
+    ],
   },
 ];
 
@@ -90,6 +120,12 @@ const useClassStore = create(
             state.classes = state.classes.filter(
               (classItem) => classItem.id !== id
             );
+          }),
+        insertReview: (id, review) =>
+          set((state) => {
+            state.classes
+              .find((classItem) => classItem.id === id)
+              .reviews.push(review);
           }),
       })),
       {

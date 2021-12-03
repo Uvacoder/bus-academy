@@ -1,7 +1,6 @@
-import { FormProvider, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { HiSearch } from 'react-icons/hi';
 import { useRouter } from 'next/router';
-import toast from 'react-hot-toast';
 
 const categoryFilter = [
   { id: 'live', label: 'Kelas Live' },

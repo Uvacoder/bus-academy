@@ -5,7 +5,7 @@ import caraPembayaranImg from '@/public/images/cara-pembayaran.jpg';
 
 import Seo from '@/components/Seo';
 import Nav from '@/components/Nav';
-import ClassCard from '@/components/ClassCard';
+import UnstyledLink from '@/components/UnstyledLink';
 import { HiCash } from 'react-icons/hi';
 import { classNames } from '@/lib/helper';
 
@@ -83,7 +83,7 @@ export default function Riwayat() {
                   <tr key={transaction.id} className='bg-white'>
                     <td className='w-full px-6 py-4 text-sm text-gray-900 max-w-0 whitespace-nowrap'>
                       <div className='flex'>
-                        <a
+                        <UnstyledLink
                           href={transaction.href}
                           className='inline-flex space-x-2 text-sm truncate group'
                         >
@@ -94,7 +94,7 @@ export default function Riwayat() {
                           <p className='text-gray-500 truncate group-hover:text-gray-900'>
                             {transaction.name}
                           </p>
-                        </a>
+                        </UnstyledLink>
                       </div>
                     </td>
                     <td className='px-6 py-4 text-sm text-right text-gray-500 whitespace-nowrap'>

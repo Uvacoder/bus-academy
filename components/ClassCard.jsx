@@ -99,7 +99,7 @@ export default function ClassCard({
         ) : showPrice ? (
           <p className='text-lg font-bold'>Rp {data?.price ?? 50.0}</p>
         ) : showReviewButton ? (
-          <CustomLink href='/kelas/review'>Beri Ulasan</CustomLink>
+          <CustomLink href={`/review/${id}`}>Beri Ulasan</CustomLink>
         ) : null}
       </div>
       {addToCart && (

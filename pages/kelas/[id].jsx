@@ -45,13 +45,17 @@ export default function Kelas() {
                   {currentClass?.description ?? 'Description'}
                 </p>
                 <h3 className='mt-4 font-semibold'>Ulasan</h3>
-                <div className='flex flex-col py-2'>
-                  <span className='flex items-center gap-2 text-lg font-medium text-sky-500'>
-                    <HiStar className='text-xl text-sky-500' /> 5/5
-                  </span>
-                  <p className='text-lg font-semibold'>Bambang Hartoyo</p>
-                  <p>Sumpah bagus banget ini coursenya! Recommended parah</p>
-                </div>
+                {currentClass?.reviews.length > 0 &&
+                  currentClass?.reviews.map((r) => (
+                    <div className='flex flex-col py-2'>
+                      <span className='flex items-center gap-2 text-lg font-medium text-sky-500'>
+                        <HiStar className='text-xl text-sky-500' />{' '}
+                        {r.rating_kelas}/5
+                      </span>
+                      <p className='text-lg font-semibold'>{r.name}</p>
+                      <p>{r.ulasan}</p>
+                    </div>
+                  ))}
                 <div className='flex flex-col py-2'>
                   <span className='flex items-center gap-2 text-lg font-medium text-sky-500'>
                     <HiStar className='text-xl text-sky-500' /> 4.5/5
