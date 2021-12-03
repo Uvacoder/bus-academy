@@ -17,6 +17,12 @@ export default function Register() {
 
   function onSubmit(data) {
     console.log(data);
+    // store to local storage
+    const existingUsers = localStorage.getItem('usersDB');
+    const existing = existingUsers ? JSON.parse(existingUsers) : [];
+    existing.push(data);
+    localStorage.setItem('usersDB', JSON.stringify(existing));
+
     toast.success('Registrasi berhasil');
     router.push('/');
   }

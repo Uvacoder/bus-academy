@@ -16,8 +16,27 @@ export default function Example() {
   const router = useRouter();
 
   function onSubmit(data) {
-    console.log(data);
+    const _users = localStorage.getItem('usersDB');
+    if (!_users) {
+      return toast.error(
+        'Akun belum terdaftar, silahkan register terlebih dahulu'
+      );
+    }
+    const users = JSON.parse(_users);
+    const foundUser = users.find((u) => u.email === data.email);
+    if (!foundUser) {
+      return toast.error(
+        'Akun belum terdaftar, silahkan register terlebih dahulu'
+      );
+    }
+
+    // Check passowrd
+    if (foundUser.password !== data.password) {
+      return toast.error('Password salah');
+    }
+
     toast.success('Login berhasil');
+    localStorage.setItem('academy-profile', JSON.stringify(foundUser));
     router.push('/');
   }
   return (
