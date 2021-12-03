@@ -1,3 +1,4 @@
+import { matchSorter } from 'match-sorter';
 import { useRouter } from 'next/router';
 
 import Seo from '@/components/Seo';
@@ -15,6 +16,12 @@ export default function Keranjang() {
 
   const classes = useClassStore((state) => state.classes);
 
+  const sortedClass = searchTerm
+    ? matchSorter(classes, searchTerm, {
+        keys: ['title', 'description'],
+      })
+    : classes;
+
   return (
     <>
       <Seo />
@@ -26,19 +33,9 @@ export default function Keranjang() {
             <h1 className='text-center capitalize'>
               {searchTerm ? `Pencarian tentang "${searchTerm}"` : 'Cari Kelas'}
             </h1>
+            <FilterBox />
             <div className='grid grid-cols-1 gap-4 mt-16 md:grid-cols-3'>
-              {classes.slice(0, 2).map((cl) => (
-                <ClassCard
-                  key={cl.id}
-                  data={cl}
-                  isLive={cl.isLive}
-                  id={cl.id}
-                  showPrice
-                  addToCart
-                />
-              ))}
-              <FilterBox />
-              {classes.slice(2).map((cl) => (
+              {sortedClass.map((cl) => (
                 <ClassCard
                   key={cl.id}
                   data={cl}

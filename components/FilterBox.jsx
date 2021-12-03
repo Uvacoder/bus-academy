@@ -4,11 +4,8 @@ import { useRouter } from 'next/router';
 import toast from 'react-hot-toast';
 
 const categoryFilter = [
-  { id: 'softskills', label: 'Softskills' },
-  { id: 'hardskills', label: 'Hardskills' },
-  { id: 'bercocok', label: 'Bercocok Tanam' },
-  { id: 'frontend', label: 'Frontend Development' },
-  { id: 'backend', label: 'Backend Development' },
+  { id: 'live', label: 'Kelas Live' },
+  { id: 'nonlive', label: 'Kelas Non Live' },
 ];
 export default function FilterBox() {
   const router = useRouter();
@@ -19,7 +16,7 @@ export default function FilterBox() {
     reset();
   }
   return (
-    <div className='flex flex-col gap-8'>
+    <div className='flex flex-col items-end gap-8'>
       <div className='w-full max-w-lg lg:max-w-xs'>
         <label htmlFor='search' className='sr-only'>
           Search
@@ -40,7 +37,7 @@ export default function FilterBox() {
           </form>
         </div>
       </div>
-      <div>
+      {/* <div>
         <h3>Filter Kategori:</h3>
         <div className='flex flex-col items-start gap-2 mt-4'>
           {categoryFilter.map((item) => (
@@ -56,7 +53,7 @@ export default function FilterBox() {
             Filter Pilihan
           </button>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }
