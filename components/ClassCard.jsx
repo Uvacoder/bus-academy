@@ -108,7 +108,7 @@ export default function ClassCard({
         <div className='flex items-center justify-between w-full'>
           <UnstyledLink
             className='block text-sm font-bold underline text-sky-500 hover:text-sky-600'
-            href='/detail'
+            href={`/kelas/${id}`}
           >
             Lihat Detail
           </UnstyledLink>
