@@ -14,6 +14,8 @@ const initialClass = [
     isLive: true,
     time: 'Juli 2022, 14:00 – 18:00 WIB',
     img: 'https://unsplash.it/709/383?id=1',
+    link_modul: '/modul.pdf',
+    link_zoom: 'https://zoom.us',
   },
   {
     id: '2',
@@ -23,6 +25,8 @@ const initialClass = [
     instructor: 'Jack Frost',
     price: '80.000',
     img: 'https://unsplash.it/709/383?id=2',
+    link_modul: '/modul.pdf',
+    link_video: 'dHAbmoFHqgA',
   },
   {
     id: '3',
@@ -34,6 +38,8 @@ const initialClass = [
     isLive: true,
     time: 'November 2022, 14:00 – 18:00 WIB',
     img: 'https://unsplash.it/709/383?id=3',
+    link_modul: '/modul.pdf',
+    link_zoom: 'https://zoom.us',
   },
   {
     id: '4',
@@ -43,6 +49,8 @@ const initialClass = [
     instructor: 'Zukko',
     price: '20.000',
     img: 'https://unsplash.it/709/383?id=4',
+    link_modul: '/modul.pdf',
+    link_video: 'dHAbmoFHqgA',
   },
   {
     id: '5',
@@ -52,6 +60,8 @@ const initialClass = [
     instructor: 'Dr. Seuss',
     price: '40.000',
     img: 'https://unsplash.it/709/383?id=5',
+    link_modul: '/modul.pdf',
+    link_video: 'dHAbmoFHqgA',
   },
   {
     id: '6',
@@ -61,6 +71,8 @@ const initialClass = [
     instructor: 'Tulus Kribo',
     price: '150.000',
     img: 'https://unsplash.it/709/383?id=6',
+    link_modul: '/modul.pdf',
+    link_video: 'dHAbmoFHqgA',
   },
 ];
 

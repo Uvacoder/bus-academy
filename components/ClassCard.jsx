@@ -95,9 +95,7 @@ export default function ClassCard({
           </p>
         </div>
         {access ? (
-          <CustomLink href={`/kelas/${isLive ? 'live' : 'non-live'}`}>
-            Akses Kelas
-          </CustomLink>
+          <CustomLink href={`/akses/${id}`}>Akses Kelas</CustomLink>
         ) : showPrice ? (
           <p className='text-lg font-bold'>Rp {data?.price ?? 50.0}</p>
         ) : showReviewButton ? (

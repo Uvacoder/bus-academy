@@ -13,10 +13,6 @@ export default function Kelas() {
   //#region  //*=========== Get Class By Id ===========
   const classes = useClassStore((state) => state.classes);
   const currentClass = classes.find((c) => c.id === id);
-  console.log(
-    '🚀 ~ file: [id].jsx ~ line 16 ~ Kelas ~ currentClass',
-    currentClass
-  );
   //#endregion  //*======== Get Class By Id ===========
 
   return (
