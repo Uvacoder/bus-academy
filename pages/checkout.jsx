@@ -1,3 +1,4 @@
+import axios from 'axios';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
@@ -48,6 +49,13 @@ export default function Checkout() {
   //#endregion  //*======== Get Classes ===========
 
   const totalPrice = cartClass.reduce((a, b) => a + parseInt(b.price), 0) - 10;
+
+  const handleBayar = () => {
+    axios.get(`/api/mid?total=${totalPrice}000`).then((res) => {
+      const { token } = res.data;
+      window.snap.pay(token);
+    });
+  };
 
   return (
     <>
@@ -104,7 +112,7 @@ export default function Checkout() {
                       Batal
                     </button>
                     <button
-                      onClick={() => window.snap.pay(token)}
+                      onClick={handleBayar}
                       className='inline-flex items-center h-10 gap-1 px-3 py-2 text-sm font-medium text-white rounded-md hover:bg-sky-400 bg-sky-500'
                     >
                       Bayar Sekarang
