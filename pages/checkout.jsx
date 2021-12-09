@@ -10,14 +10,10 @@ import Nav from '@/components/Nav';
 import ClassCard from '@/components/ClassCard';
 import useCartStore from '@/store/CartStore';
 import useClassStore from '@/store/useClassStore';
+import { getFromLocalStorage } from '@/lib/helper';
 
 export default function Checkout() {
   const router = useRouter();
-  const [token, setToken] = useState('dca5a278-534c-4d81-9e7f-ae01b416434e');
-
-  const onTokenChange = (e) => {
-    setToken(e.target.value);
-  };
 
   useEffect(() => {
     //change this to the script source you want to load, for example this is snap.js sandbox env
@@ -39,6 +35,7 @@ export default function Checkout() {
 
   const carts = useCartStore((state) => state.carts);
   const removeItem = useCartStore((state) => state.removeItem);
+  const clearCart = useCartStore((state) => state.clearCart);
 
   //#region  //*=========== Get Classes ===========
   const classes = useClassStore((state) => state.classes);
@@ -48,13 +45,77 @@ export default function Checkout() {
   );
   //#endregion  //*======== Get Classes ===========
 
+  const invoiceCart = carts.map((c) => c.id);
+
   const totalPrice = cartClass.reduce((a, b) => a + parseInt(b.price), 0) - 10;
 
   const handleBayar = () => {
+    const invoice = {
+      total: totalPrice + '000',
+      items: invoiceCart,
+      status: 'processing',
+      tanggal: new Date(),
+      name: cartClass[0].title,
+    };
+    const existing = localStorage.getItem('academy-invoice');
+
+    if (existing) {
+      const existingInvoice = JSON.parse(existing);
+      const maxId = Math.max(...existingInvoice.map((tr) => tr.id)) + 1;
+      invoice.id = maxId;
+      const newInvoice = [...existingInvoice, invoice];
+      localStorage.setItem('academy-invoice', JSON.stringify(newInvoice));
+    } else {
+      invoice.id = '4';
+      localStorage.setItem('academy-invoice', JSON.stringify([invoice]));
+    }
+
     axios.get(`/api/mid?total=${totalPrice}000`).then((res) => {
       const { token } = res.data;
       window.snap.pay(token);
     });
+  };
+
+  const bypassBayar = () => {
+    const invoices = localStorage.getItem('academy-invoice');
+    const invoice = JSON.parse(invoices);
+    const filtered = invoice.filter(
+      (i) =>
+        !(
+          i.status === 'processing' &&
+          i.items.length === carts.length &&
+          i.total === totalPrice + '000'
+        )
+    );
+
+    const successInvoice = {
+      total: totalPrice + '000',
+      items: invoiceCart,
+      status: 'success',
+      tanggal: new Date(),
+      name: cartClass[0].title,
+      id:
+        filtered.length > 0 ? Math.max(...filtered.map((tr) => tr.id)) + 1 : 4,
+    };
+
+    localStorage.setItem(
+      'academy-invoice',
+      JSON.stringify([...filtered, successInvoice])
+    );
+
+    clearCart();
+    const _access = getFromLocalStorage('academy-access');
+    if (_access) {
+      const access = JSON.parse(_access);
+      const newAccess = [...access, ...invoiceCart];
+
+      localStorage.setItem('academy-access', JSON.stringify(newAccess));
+    } else {
+      const access = [...invoiceCart];
+      localStorage.setItem('academy-access', JSON.stringify(access));
+    }
+
+    router.push('/riwayat');
   };
 
   return (
@@ -121,14 +182,14 @@ export default function Checkout() {
                 </div>
                 <div className='mt-8'>
                   <label htmlFor='token'>
-                    TOKEN (HANYA DITAMPILKAN PADA TAHAP DEVELOPMENT)
+                    Bypass Bayar (HANYA DITAMPILKAN PADA TAHAP DEVELOPMENT)
                   </label>
-                  <input
-                    type='text'
-                    name='token'
-                    value={token}
-                    onChange={onTokenChange}
-                  />
+                  <button
+                    onClick={bypassBayar}
+                    className='inline-flex items-center h-10 gap-1 px-3 py-2 text-sm font-medium text-white rounded-md hover:bg-sky-400 bg-sky-500'
+                  >
+                    Bypass
+                  </button>
                 </div>
               </main>
             </article>

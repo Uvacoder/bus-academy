@@ -12,6 +12,7 @@ const useCartStore = create(
           set((state) => ({
             carts: state.carts.filter((c) => c.id !== id),
           })),
+        clearCart: () => set((state) => ({ carts: [] })),
       }),
       {
         name: 'academy-cart',

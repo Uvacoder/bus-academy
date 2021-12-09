@@ -7,14 +7,14 @@ import Seo from '@/components/Seo';
 import Nav from '@/components/Nav';
 import UnstyledLink from '@/components/UnstyledLink';
 import { HiCash } from 'react-icons/hi';
-import { classNames } from '@/lib/helper';
+import { classNames, getFromLocalStorage } from '@/lib/helper';
 
-const transactions = [
+const defaultTransactions = [
   {
     id: 1,
     name: 'Manage Public Speaking & Bercocok Tanam',
     href: '/riwayat/pembelian/success',
-    amount: 'Rp 150.000',
+    amount: 'Rp 150000',
     currency: 'IDR',
     status: 'success',
     date: 'July 11, 2021',
@@ -24,7 +24,7 @@ const transactions = [
     id: 2,
     name: 'TOEFL IBT 100%',
     href: '/riwayat/pembelian/processing',
-    amount: 'Rp 110.000',
+    amount: 'Rp 110000',
     currency: 'IDR',
     status: 'processing',
     date: 'July 11, 2021',
@@ -34,7 +34,7 @@ const transactions = [
     id: 3,
     name: 'Strive challenges with trigger',
     href: '/riwayat/pembelian/cancelled',
-    amount: 'Rp 50.000',
+    amount: 'Rp 50000',
     currency: 'IDR',
     status: 'cancelled',
     date: 'July 12, 2021',
@@ -51,6 +51,21 @@ const statusStyles = {
 
 export default function Riwayat() {
   const router = useRouter();
+
+  const _invoices = getFromLocalStorage('academy-invoice');
+  const invoices = JSON.parse(_invoices);
+  const newInvoices = invoices.map((invoice) => ({
+    id: invoice.id,
+    name: invoice.name,
+    href: `/riwayat/pembelian/${invoice.id}`,
+    amount: `Rp ${invoice.total}`,
+    currency: 'IDR',
+    date: new Date(invoice.tanggal).toLocaleDateString('id-ID'),
+    datetime: invoice.tanggal,
+    status: invoice.status,
+  }));
+
+  const transactions = [...defaultTransactions, ...newInvoices];
 
   return (
     <>
