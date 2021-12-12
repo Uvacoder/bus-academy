@@ -7,15 +7,17 @@ import {
   HiOutlinePhotograph,
   HiX,
 } from 'react-icons/hi';
+import useChatStore from '@/store/useChatStore';
 
 export default function ChatAdmin() {
   const router = useRouter();
   const { handleSubmit, register, reset } = useForm();
 
-  const [messages, setMessages] = useState([]);
+  const chats = useChatStore((state) => state.chats);
+  const addChat = useChatStore((state) => state.addChat);
 
   const onSubmit = ({ message }) => {
-    setMessages((prev) => [...prev, message]);
+    addChat('Admin', message);
     reset();
   };
 
@@ -68,9 +70,13 @@ export default function ChatAdmin() {
                 className='object-cover ml-auto w-36 rounded-xl'
               />
             </div>
-            {messages.map((msg) => (
-              <ChatAnda key={msg} message={msg} />
-            ))}
+            {chats.map((c) =>
+              c.name === 'Admin' ? (
+                <ChatAnda key={c.message} message={c.message} />
+              ) : (
+                <ChatBambang key={c.message} message={c.message} />
+              )
+            )}
           </main>
           <footer>
             <form
@@ -114,6 +120,19 @@ function ChatAnda({ message }) {
     <div className='py-2 text-right'>
       <p className='font-bold'>
         Anda <span className='ml-2 font-normal text-gray-500'>10.05</span>
+      </p>
+      <span className='inline-block p-2 mt-1 rounded-tl-xl rounded-br-xl bg-sky-100'>
+        {message}
+      </span>
+    </div>
+  );
+}
+
+function ChatBambang({ message }) {
+  return (
+    <div className='py-2'>
+      <p className='font-bold'>
+        Bambang <span className='ml-2 font-normal text-gray-500'>10.05</span>
       </p>
       <span className='inline-block p-2 mt-1 rounded-tl-xl rounded-br-xl bg-sky-100'>
         {message}
