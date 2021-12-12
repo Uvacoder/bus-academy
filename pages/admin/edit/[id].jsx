@@ -34,6 +34,9 @@ import { classNames } from '@/lib/helper';
 import UnstyledLink from '@/components/UnstyledLink';
 import EditKelasForm from '@/components/EditKelasForm';
 import Seo from '@/components/Seo';
+import { useRouter } from 'next/router';
+import useClassStore from '@/store/useClassStore';
+import { current } from 'immer';
 
 const navigation = [
   { name: 'Home', href: '/admin', icon: HomeIcon, current: false },
@@ -110,6 +113,18 @@ const projects = [
 
 export default function Edit() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  const router = useRouter();
+  const { id } = router.query;
+
+  //#region  //*=========== Get Class By Id ===========
+  const classes = useClassStore((state) => state.classes);
+  const currentClass = classes.find((c) => c.id === id);
+  console.log(
+    '🚀 ~ file: [id].jsx ~ line 122 ~ Edit ~ currentClass',
+    currentClass
+  );
+  //#endregion  //*======== Get Class By Id ===========
 
   return (
     <>
@@ -458,20 +473,21 @@ export default function Edit() {
             </div>
             <div className='max-w-6xl px-4 mx-auto mt-8 sm:px-6 lg:px-8'>
               <h2>Edit kelas</h2>
-              <EditKelasForm
-                defaultValues={{
-                  nama_kelas: 'Public Speaking for Beginners',
-                  nama_instruktur: 'Jack Frost',
-                  harga_kelas: '200.000',
-                  kategori_kelas: 'Softskills',
-                  jenis: 'Live',
-                  deskripsi_kelas:
-                    'Public speaking adalah hal yang menyenangkan',
-                  tgl_live: new Date(),
-                  link_zoom: 'https://zoom.com',
-                  link_modul: 'https://hi.com',
-                }}
-              />
+              {currentClass && (
+                <EditKelasForm
+                  defaultValues={{
+                    nama_kelas: currentClass?.title,
+                    nama_instruktur: currentClass?.instructor,
+                    harga_kelas: currentClass?.price,
+                    jenis: currentClass?.isLive ? 'Live' : 'Non Live',
+                    deskripsi_kelas: currentClass?.description,
+                    tgl_live: new Date(),
+                    link_zoom: currentClass?.link_zoom,
+                    link_modul: currentClass?.link_modul,
+                    link_video: currentClass?.link_video,
+                  }}
+                />
+              )}
             </div>
           </main>
         </div>

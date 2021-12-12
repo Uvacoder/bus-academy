@@ -102,7 +102,7 @@ export default function KelasTable() {
                         <Menu.Item>
                           {({ active }) => (
                             <UnstyledLink
-                              href='/admin/edit'
+                              href={`/admin/edit/${project.id}`}
                               className={classNames(
                                 active
                                   ? 'bg-gray-100 text-gray-900'

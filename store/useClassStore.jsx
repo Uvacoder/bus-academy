@@ -115,6 +115,12 @@ const useClassStore = create(
           set((state) => {
             state.classes.push(newClass);
           }),
+        putClass: (id, newClass) =>
+          set((state) => {
+            state.classes = state.classes.map((item) =>
+              item.id === id ? { ...item, ...newClass } : item
+            );
+          }),
         removeClass: (id) =>
           set((state) => {
             state.classes = state.classes.filter(

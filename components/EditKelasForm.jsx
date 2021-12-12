@@ -17,10 +17,12 @@ export default function EditKelasForm({ defaultValues }) {
 
   const classes = useClassStore((state) => state.classes);
   const addClass = useClassStore((state) => state.addClass);
+  const putClass = useClassStore((state) => state.putClass);
 
   const jenis = watch('jenis');
 
   const router = useRouter();
+
   function onSubmit(data) {
     const isLive = data.jenis === 'Live';
 
@@ -37,9 +39,20 @@ export default function EditKelasForm({ defaultValues }) {
         : undefined,
       img: `https://unsplash.it/709/383?id=${newId}`,
       link_video: !isLive ? data.link_video : undefined,
-      link_zoom: data.link_zoom,
-      link_modul: isLive ? data.link_modul : undefined,
+      link_zoom: isLive ? data.link_zoom : undefined,
+      link_modul: data.link_modul,
     };
+
+    const isEdit = router.asPath.includes('edit');
+
+    if (isEdit) {
+      const editId = router.asPath.split('/')[3];
+      putClass(editId, { ...mappedData, id: editId });
+      toast.success('Kelas berhasil diedit');
+      router.push('/admin/kelas');
+      return;
+    }
+
     addClass(mappedData);
     toast.success('Kelas berhasil ditambahkan');
     router.push('/admin/kelas');
@@ -85,16 +98,7 @@ export default function EditKelasForm({ defaultValues }) {
                 }}
               />
             </div>
-            <div>
-              <Input
-                label='Kategori Kelas'
-                id='kategori_kelas'
-                type='text'
-                validation={{
-                  required: 'Kategori kelas tidak boleh kosong',
-                }}
-              />
-            </div>
+
             <Select
               label='Jenis Kelas'
               id='jenis'
@@ -183,9 +187,9 @@ export default function EditKelasForm({ defaultValues }) {
           <div className='flex justify-end gap-2 mt-8'>
             <button
               onClick={(e) => {
-                e.preventDefault();
                 router.back();
               }}
+              type='button'
               className='px-4 py-2 text-sm font-medium bg-white border border-gray-300 rounded-md'
             >
               Batal
