@@ -32,7 +32,7 @@ export default function KelasTable() {
     const newId = Math.max(...projects.map((project) => project.id)) + 1;
     const newObj = {
       ...projects.find((project) => project.id === id),
-      id: newId,
+      id: newId + '',
     };
     // console.log(newObj);
     addClass(newObj);
